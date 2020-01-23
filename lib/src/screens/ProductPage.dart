@@ -1,6 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:drive_thru/src/screens/ResturantList.dart';
-import 'package:drive_thru/src/screens/menu.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import '../shared/Product.dart';
@@ -9,6 +7,11 @@ import '../shared/colors.dart';
 import '../shared/partials.dart';
 import '../shared/buttons.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
+import 'package:drive_thru/src/screens/AddResturant.dart';
+import 'package:drive_thru/src/screens/HomePage.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'Timerpage.dart';
+import 'Dashboard.dart';
 
 class ProductPage extends StatefulWidget {
   final String pageTitle;
@@ -36,6 +39,67 @@ class _ProductPageState extends State<ProductPage> {
           ),
           title: Text(widget.productData.name, style: h4),
         ),
+         drawer: new Drawer(  
+        child: ListView(
+
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              child: Text('Virtual DriveThru', style: logoWhiteStyle, textAlign: TextAlign.center),
+              decoration: BoxDecoration(
+                color: Colors.orange,
+              ),
+            ),
+            ListTile(
+              title: Text('Home Page'),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Text('My Profile'),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Text('My Cart'),
+              
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Text('Store'),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Text('Add restaurant'),
+              onTap: () {
+                Navigator.pushReplacement(context, PageTransition(type: PageTransitionType.leftToRightWithFade, child: AddResturant()));
+              },
+            ),
+            ListTile(
+              title: Text('Settings'),
+              
+              onTap: () {
+                Navigator.pop(context);
+                
+              },
+            ),
+            ListTile(
+              title: Text('Sign Out'),
+              onTap: () {
+                FirebaseAuth.instance.signOut().then((value){
+                Navigator.pushReplacement(context, PageTransition(type: PageTransitionType.leftToRightWithFade, child: HomePage()));
+                }).catchError((e){print(e);});
+              },
+            ),
+          ],
+        ),
+      ),
         body: ListView(
           children: <Widget>[
             Container(
@@ -124,10 +188,11 @@ class _ProductPageState extends State<ProductPage> {
                               Firestore.instance.collection('/Orders').add({
                                 'Item Name' : widget.productData.name,
                                 'Item Price' : widget.productData.price,
+                                //'Duration' :Duration,
                                 'Units' : _quantity 
                               }).then((value){
                                 //Navigator.of(context).pop();
-                                Navigator.pushReplacement(context, PageTransition(type: PageTransitionType.leftToRight, child: Menu()));
+                                Navigator.pushReplacement(context, PageTransition(type: PageTransitionType.leftToRight, child: TimerPage()));
                               }).catchError((e){print(e);});
                             }),
                           ),

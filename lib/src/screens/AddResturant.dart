@@ -1,5 +1,5 @@
 import 'package:drive_thru/src/screens/ResturantList.dart';
-import 'package:drive_thru/src/screens/menu.dart';
+import 'package:drive_thru/src/screens/Dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -7,6 +7,8 @@ import 'package:drive_thru/src/services/resturantManagement.dart';
 import '../shared/styles.dart';
 import '../shared/colors.dart';
 import 'dart:core';
+
+import 'Dashboard.dart';
 
 class AddResturant extends StatefulWidget {
   @override
@@ -45,7 +47,7 @@ class _AddResturantState extends State<AddResturant>
           leading: BackButton(
             color: darkText,
             onPressed: (){
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context){return new Menu(); }));
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context){return new DashBoard(); }));
             },
           ),
           title: Text("Add a Resturant", style: h4),

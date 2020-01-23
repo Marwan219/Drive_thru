@@ -1,14 +1,11 @@
-import 'package:drive_thru/src/screens/menu.dart';
+import 'package:drive_thru/src/screens/Menu.dart';
 import 'package:drive_thru/src/shared/Loading.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../shared/styles.dart';
 import '../shared/colors.dart';
-import '../shared/inputFields.dart';
 import 'package:page_transition/page_transition.dart';
 import './SignUpPage.dart';
-import './ResturantList.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 class SignInPage extends StatefulWidget {
   final String pageTitle;

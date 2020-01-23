@@ -3,11 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:drive_thru/src/services/userManagement.dart';
 import '../shared/styles.dart';
 import '../shared/colors.dart';
-import '../shared/inputFields.dart';
 import 'package:page_transition/page_transition.dart';
-import './SignInPage.dart';
-import './ResturantList.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+
+import 'Dashboard.dart';
 
 
 class SignUpPage extends StatefulWidget {
@@ -40,7 +39,7 @@ class _SignUpPageState extends State<SignUpPage> {
           FlatButton(
             onPressed: () {
               // Navigator.of(context).pushReplacementNamed('/signin');
-              Navigator.pushReplacement(context, PageTransition(type: PageTransitionType.rightToLeft, child: SignInPage()));
+              Navigator.pushReplacement(context, PageTransition(type: PageTransitionType.rightToLeft, child: DashBoard()));
 
             },
             child: Text('Sign In', style: contrastText),

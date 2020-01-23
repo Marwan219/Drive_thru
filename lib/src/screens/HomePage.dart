@@ -1,4 +1,3 @@
-import 'package:drive_thru/src/screens/ResturantList.dart';
 import 'package:flutter/material.dart';
 import '../shared/styles.dart';
 import '../shared/colors.dart';

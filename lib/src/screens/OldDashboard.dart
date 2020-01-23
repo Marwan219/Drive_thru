@@ -1,27 +1,21 @@
-import 'package:drive_thru/src/screens/OldDashboard.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:drive_thru/src/screens/AddResturant.dart';
-import 'package:drive_thru/src/screens/HomePage.dart';
 import '../shared/styles.dart';
 import '../shared/colors.dart';
 import '../shared/fryo_icons.dart';
+import './ProductPage.dart';
 import '../shared/Product.dart';
 import '../shared/partials.dart';
-import './Timerpage.dart';
-import 'package:page_transition/page_transition.dart';
 
-
-class ResturantList extends StatefulWidget {
+class OldDashboard extends StatefulWidget {
   final String pageTitle;
 
-  ResturantList({Key key, this.pageTitle}) : super(key: key);
+  OldDashboard({Key key, this.pageTitle}) : super(key: key);
 
   @override
-  _ResturantListState createState() => _ResturantListState();
+  _OldDashboardState createState() => _OldDashboardState();
 }
 
-class _ResturantListState extends State<ResturantList> {
+class _OldDashboardState extends State<OldDashboard> {
   int _selectedIndex = 0;
 
   @override
@@ -37,93 +31,15 @@ class _ResturantListState extends State<ResturantList> {
     return Scaffold(
         backgroundColor: bgColor,
         appBar: AppBar(
-          centerTitle: true,
           elevation: 0,
-          leading: IconButton(
-            onPressed: () {
-              Navigator.pushReplacement(context, PageTransition(type: PageTransitionType.leftToRightWithFade, child: AddResturant()));
-            },
-            iconSize: 21,
-            icon: Icon(Icons.add,color: white,)
+          backgroundColor: bgColor,
+          centerTitle: true,
+          leading: BackButton(
+            color: darkText,
           ),
-          backgroundColor: primaryColor,
-          title:
-              Text('Virtual DriveThru', style: logoWhiteStyle, textAlign: TextAlign.center),
-          actions: <Widget>[
-            FlatButton(
-                onPressed: () {
-                    FirebaseAuth.instance.signOut().then((value){
-                      Navigator.pushReplacement(context, PageTransition(type: PageTransitionType.leftToRightWithFade, child: HomePage()));
-                    }).catchError((e){print(e);});
-                  },
-                color: primaryColor,
-                padding: EdgeInsets.all(2),
-               shape: CircleBorder(),
-                child: Icon(Icons.delete, color: white),
-            )
-          ],
+          title: Text("Resturant Name", style: h4),
         ),
-        drawer: new Drawer(  
-        child: ListView(
-
-          padding: EdgeInsets.zero,
-          children: <Widget>[
-            DrawerHeader(
-              child: Text('Virtual DriveThru', style: logoWhiteStyle, textAlign: TextAlign.center),
-              decoration: BoxDecoration(
-                color: Colors.orange,
-              ),
-            ),
-            ListTile(
-              title: Text('Home Page'),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              title: Text('My Profile'),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              title: Text('My Cart'),
-              
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              title: Text('Store'),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              title: Text('Add restaurant'),
-              onTap: () {
-                Navigator.pushReplacement(context, PageTransition(type: PageTransitionType.leftToRightWithFade, child: AddResturant()));
-              },
-            ),
-            ListTile(
-              title: Text('Settings'),
-              
-              onTap: () {
-                Navigator.pop(context);
-                
-              },
-            ),
-            ListTile(
-              title: Text('Sign Out'),
-              onTap: () {
-                FirebaseAuth.instance.signOut().then((value){
-                Navigator.pushReplacement(context, PageTransition(type: PageTransitionType.leftToRightWithFade, child: HomePage()));
-                }).catchError((e){print(e);});
-              },
-            ),
-          ],
-        ),
-      ),
+        body: _tabs[_selectedIndex],
         );
   }
 
@@ -145,7 +61,6 @@ Widget storeTab(BuildContext context) {
         price: "\$25.00",
         userLiked: true,
         discount: 10),
-        
     Product(
         name: "Pasta",
         image: "images/5.png",
@@ -190,99 +105,136 @@ Widget storeTab(BuildContext context) {
         price: "\$168.99",
         userLiked: true,
         discount: 3.4)
-        
   ];
-  duration: Duration(seconds: 10);
 
   return ListView(children: <Widget>[
-    // headerTopCategories(),
-    deals('Rsturnts', onViewMore: () {}, items: <Widget>[
-      rest(foods[0], onTapped: () {
+    Container(
+      
+      child: Stack(
+        alignment: Alignment(-1.0,1.0),
+        children: <Widget>[
+          Image.asset('images/rest.jpg',fit: BoxFit.cover,width: double.infinity,),
+          Container(
+            width: double.infinity,
+            padding: EdgeInsets.all(20),
+            decoration: BoxDecoration(color: Color.fromARGB(90, 0, 0, 0)),
+            child:Text("Resturant Name",
+              style: TextStyle(
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
+                color: Color.fromRGBO(225, 225, 225, 1),
+              ),
+            )
+          )
+      ],), 
+    ),
+    headerTopCategories(),
+    deals('Hot Deals', onViewMore: () {}, items: <Widget>[
+      foodItem(foods[0], onTapped: () {
         Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) {
-              return new OldDashboard();
+              return new ProductPage(
+                productData: foods[0],
+              );
             },
           ),
         );
       }, onLike: () {}),
-      rest(foods[1], onTapped: () {
+      foodItem(foods[1], onTapped: () {
         Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) {
-              return new OldDashboard();
+              return new ProductPage(
+                productData: foods[1],
+              );
             },
           ),
         );
       }, imgWidth: 250, onLike: () {
         
       }),
-      rest(foods[2], onTapped: () {
+      foodItem(foods[2], onTapped: () {
          Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) {
-              return new OldDashboard();
+              return new ProductPage(
+                productData: foods[2],
+              );
             },
           ),
         );
       }, imgWidth: 200, onLike: () {
        
       }),
-      rest(foods[3], onTapped: () {
+      foodItem(foods[3], onTapped: () {
         Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) {
-              return new OldDashboard();
+              return new ProductPage(
+                productData: foods[3],
+              );
             },
           ),
         );
-      }, onLike: () {}),
-      rest(drinks[0], onTapped: () {
+      }, onLike: () {
+        
+      }),
+    ]),
+    deals('Drinks Parol', onViewMore: () {}, items: <Widget>[
+      foodItem(drinks[0], onTapped: () {
         Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) {
-              return new OldDashboard();
+              return new ProductPage(
+                productData: drinks[0],
+              );
             },
           ),
         );
       }, onLike: () {}, imgWidth: 60),
-      rest(drinks[1], onTapped: () {
+      foodItem(drinks[1], onTapped: () {
         Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) {
-              return new OldDashboard();
+              return new ProductPage(
+                productData: drinks[1],
+              );
             },
           ),
         );
       }, onLike: () {}, imgWidth: 75),
-      rest(drinks[2], onTapped: () {
+      foodItem(drinks[2], onTapped: () {
         Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) {
-             return new OldDashboard();
+              return new ProductPage(
+                productData: drinks[2],
+              );
             },
           ),
         );
       }, imgWidth: 110, onLike: () {}),
-      rest(drinks[3], onTapped: () {
+      foodItem(drinks[3], onTapped: () {
         Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) {
-              return new OldDashboard();
+              return new ProductPage(
+                productData: drinks[3],
+              );
             },
           ),
         );
       }, onLike: () {}),
-    ]),
-    
+    ])
   ]);
 }
 
@@ -364,9 +316,9 @@ Widget deals(String dealTitle, {onViewMore, List<Widget> items}) {
       children: <Widget>[
         sectionHeader(dealTitle, onViewMore: onViewMore),
         SizedBox(
-          height: 400,
+          height: 165,
           child: ListView(
-            scrollDirection: Axis.vertical,
+            scrollDirection: Axis.horizontal,
             children: (items != null)
                 ? items
                 : <Widget>[
