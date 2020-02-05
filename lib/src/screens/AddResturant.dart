@@ -1,131 +1,185 @@
-import 'package:drive_thru/src/screens/ResturantList.dart';
-import 'package:drive_thru/src/screens/Dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:drive_thru/src/services/resturantManagement.dart';
 import '../shared/styles.dart';
-import '../shared/colors.dart';
 import 'dart:core';
+import '../shared/buttons.dart';
 
-import 'Dashboard.dart';
+class User {
+  static const String PassionCooking = 'cooking';
+  static const String PassionHiking = 'hiking';
+  static const String PassionTraveling = 'traveling';
+  String firstName = '';
+  String lastName = '';
+  String restname = '';
+  String zipcode = '';
+  String gmNum = '';
+  String gmName = '';
+  String branNum = '';
+  String gmMail= '';
+  String hqLocation= '';
+  String hotLine= '';
+  String restNum= '';
+  String restNum2= '';
+  bool newsletter = false;
+  
+}
 
 class AddResturant extends StatefulWidget {
   @override
   _AddResturantState createState() => _AddResturantState();
 }
 
-class _AddResturantState extends State<AddResturant>
-    with SingleTickerProviderStateMixin {
-  AnimationController _controller;
-  var _foodTypes = ['Fast Food', 'Slow Food' ,'Sleepy Food', 'Other'];
-  var _selectedType = 'Slow Food';
-  String _restName;
-  String _address;
-  String _zipCode;
 
-  @override
-  void initState() {
-    super.initState();
-    _controller = AnimationController(vsync: this);
-  }
+final _formKey = GlobalKey<FormState>();
 
-  @override
-  void dispose() {
-    super.dispose();
-    _controller.dispose();
-  }
 
+class _AddResturantState extends State <AddResturant> {
+  final _user = User();
+  
+
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: bgColor,
-        appBar: AppBar(
-          elevation: 0,
-          backgroundColor: bgColor,
-          centerTitle: true,
-          leading: BackButton(
-            color: darkText,
-            onPressed: (){
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context){return new DashBoard(); }));
-            },
-          ),
-          title: Text("Add a Resturant", style: h4),
-        ),
-        body: ListView(children: <Widget>[
+        appBar: AppBar(title: Text('Add new Restaurant', style: logoWhiteStyle, textAlign: TextAlign.center),),
+        body: ListView(
+        shrinkWrap: true,
+        children: <Widget>[
           Container(
-            
-            child: Stack(
-              children: <Widget>[
-                Column(children: <Widget>[
-                  Container(
-                    child:TextField(
-                      onChanged: (value){
-                        setState(() {
-                          _restName = value;
-                        });
-                      },
-                      decoration: InputDecoration(
-                        hintText: 'Resturant Name'
-                      ),
-                    ),
-                  ),
-                  Container(
-                    child:TextField(
-                      onChanged: (value){
-                        setState(() {
-                          _address = value;
-                        });
-                      },
-                      decoration: InputDecoration(
-                        hintText: 'Address'
-                      ),
-                    ),
-                  ),
-                  Container(
-                    child:TextField(
-                      onChanged: (value){
-                        setState(() {
-                          _zipCode = value;
-                        });
-                      },
-                      decoration: InputDecoration(
-                        hintText: 'ZIP Code'
-                      ),
-                    ),
-                  ),
-                  Container(
-                    child:DropdownButton<String>(
-                      items: _foodTypes.map((String dropDownStringItem){
-                        return DropdownMenuItem<String>(
-                          value: dropDownStringItem,
-                          child: Text(dropDownStringItem),
-                        );
-                      }).toList(),
-                      onChanged: (value){
-                        setState(() {
-                          _selectedType = value;
-                        });
-                      },
-                      value: _selectedType,
-                    ),
-                  ),
-                  Container(
-                    child: FlatButton(
-                      onPressed: (){
-                        ResturantManagement().addNewResturant(context ,_restName, _address, _zipCode, _selectedType);
-                      },
-                      color: Colors.blue,
-                      child: Icon(Icons.add,color: white,),
-                    ),
-                  ),
-                ],)
-                
-              ],
-              
-            ),
-          ),
-        ],),
+            padding:
+                const EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
+            child: Builder(
+                builder: (context) => Form(
+                    key: _formKey,
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          TextFormField(
+                            decoration:
+                                InputDecoration(labelText: 'Restaurant Name'),
+                            
+                            onSaved: (val) =>
+                                setState(() => _user.restname = val),
+                                validator: (value) {
+                              if (value.isEmpty) {
+                                return('Please enter the Restaurant Name') ;
+                              }
+                            },
+                          ),
+                          TextFormField(
+                              decoration:
+                                  InputDecoration(labelText: 'Number of branches'),
+                              validator: (value) {
+                                if (value.isEmpty) {
+                                  return "Please enter the restaurant's number of branches";
+                                }
+                              },
+                              onSaved: (val) =>
+                                  setState(() => _user.branNum = val)),
+                                  TextFormField(
+                              decoration:
+                                  InputDecoration(labelText: 'Where is your head quarter in egypt?'),
+                              validator: (value) {
+                                if (value.isEmpty) {
+                                  return "Please enter the location of the restaurant's head quarter";
+                                }
+                              },
+                              onSaved: (val) =>
+                                  setState(() => _user.hqLocation = val)),
+                                  TextFormField(
+                              decoration:
+                                  InputDecoration(labelText: 'Kindly enter the Zip Code'),
+                              validator: (value) {
+                                if (value.isEmpty) {
+                                  return 'Please enter the Zip Code';
+                                }
+                              },
+                              onSaved: (val) =>
+                                  setState(() => _user.zipcode = val)),
+                                  TextFormField(
+                              decoration:
+                                  InputDecoration(labelText: "Restaurant's Hotline (optional)"),
+                        
+                              onSaved: (val) =>
+                                  setState(() => _user.hotLine = val)),
+                                  TextFormField(
+                              decoration:
+                                  InputDecoration(labelText: "Restaurant's Phone number"),
+                              validator: (value) {
+                                if (value.isEmpty) {
+                                  return "Please enter the Restaurant's Phone number";
+                                }
+                              },
+                              onSaved: (val) =>
+                                  setState(() => _user.restNum = val)),
+                                  TextFormField(
+                              decoration:
+                                  InputDecoration(labelText: "Kindly enter another phone number"),
+                              validator: (value) {
+                                if (value.isEmpty) {
+                                  return "Kindly enter another phone number";
+                                }
+                              },
+                              onSaved: (val) =>
+                                  setState(() => _user.restNum2 = val)),
+                                  TextFormField(
+                              decoration:
+                                  InputDecoration(labelText: "Kindly eneter the GM's name"),
+                              validator: (value) {
+                                if (value.isEmpty) {
+                                  return "Kindly eneter the GM's name";
+                                }
+                              },
+                              onSaved: (val) =>
+                                  setState(() => _user.gmName = val)),
+                                  TextFormField(
+                              decoration:
+                                  InputDecoration(labelText: "Kindly eneter the GM's phone number"),
+                              validator: (value) {
+                                if (value.isEmpty) {
+                                  return "Kindly eneter the GM's phone number";
+                                }
+                              },
+                              onSaved: (val) =>
+                                  setState(() => _user.gmNum = val)),
+                                  TextFormField(
+                              decoration:
+                                  InputDecoration(labelText: "Kindly eneter the GM's E-mail address"),
+                              validator: (value) {
+                                if (value.isEmpty) {
+                                  return "Kindly eneter the GM's E-mail address";
+                                }
+                              },
+                              onSaved: (val) =>
+                                  setState(() => _user.gmMail = val)),
+                                
+                          Container(
+                            padding: const EdgeInsets.fromLTRB(0, 50, 0, 20),
+                            child: Text('Recieve our apps recent news?'),
+                          ),
+                          SwitchListTile(
+                              title: const Text('Monthly Newsletter'),
+                              value: _user.newsletter,
+                              onChanged: (bool val) =>
+                                  setState(() => _user.newsletter = val)),
+                          Container(
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 16.0, horizontal: 16.0),
+                                  child: froyoOutlineBtn(('Submit'),( ){
+                                    final form = _formKey.currentState;
+                                    if (form.validate()) {
+                                      form.save();
+                                    
+                                    }
+
+                                  })
+                                  ),
+              ])
+            )
+          )
+        )
+      ]
+    )
     );
   }
 }
