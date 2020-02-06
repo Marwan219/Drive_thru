@@ -27,7 +27,7 @@ void main() => runApp(MaterialApp(
 
 class TimerPage extends StatefulWidget {
   @override
-  TimerPage({Key key}) : super(key: key);
+  TimerPage({Key key,int time}) : super(key: key);
   TimerPageState createState() => TimerPageState();
 }
 
@@ -167,7 +167,7 @@ class TimerPageState extends State<TimerPage> with TickerProviderStateMixin {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
                             Text(
-                              "Your Order is Ready in: ",
+                              "Your Order is Ready in 10 Seconds: ",
                               style: themeData.textTheme.subhead,
                             ),
                             AnimatedBuilder(

@@ -30,8 +30,8 @@ dependencies:
   page_transition: '^1.0.9'
   smooth_star_rating: '1.0.2'
   flutter_spinkit: "^4.1.1"
-  
-
+  firebase_storage:
+  image_picker:
 
 dev_dependencies:
   flutter_test:

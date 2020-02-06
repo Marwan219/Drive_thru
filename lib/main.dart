@@ -1,3 +1,4 @@
+import 'package:drive_thru/root.dart';
 import 'package:flutter/material.dart';
 import './src/screens/SignInPage.dart';
 import './src/screens/SignUpPage.dart';
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.orange,
       ),
-      home: HomePage(pageTitle: 'Welcome'),
+      home: Root(),
       routes: <String, WidgetBuilder> {
         '/signup': (BuildContext context) =>  SignUpPage(),
         '/signin': (BuildContext context) =>  SignInPage(),

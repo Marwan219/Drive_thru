@@ -12,18 +12,21 @@ List<Product> foods = [
   Product(
       name: "Hamburger",
       image: "images/3.png",
+      time: 10,
       price: "\$25.00",
       userLiked: false,
       discount: 10),
   Product(
       name: "Pasta",
       image: "images/5.png",
+      time: 22,
       price: "\$150.00",
       userLiked: false,
       discount: 7.8),
   Product(
     name: "Akara",
     image: 'images/2.png',
+    time: 15,
     price: '\$10.99',
     userLiked: false,
   ),

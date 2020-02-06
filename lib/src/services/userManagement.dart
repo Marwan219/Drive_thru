@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:drive_thru/src/screens/Dashboard.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/widgets.dart';
 import 'package:page_transition/page_transition.dart';
@@ -13,7 +14,7 @@ class UserManagement{
       'uid' : user.uid
     }).then((value){
       //Navigator.of(context).pop();
-      Navigator.pushReplacement(context, PageTransition(type: PageTransitionType.rightToLeft, child: ResturantList()));
+      Navigator.pushReplacement(context, PageTransition(type: PageTransitionType.rightToLeft, child: DashBoard()));
     }).catchError((e){print(e);});
   }
 }

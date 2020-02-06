@@ -1,6 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:drive_thru/src/screens/AddResturant.dart';
 import 'package:drive_thru/src/screens/HomePage.dart';
 import 'package:drive_thru/src/screens/Timerpage.dart';
+import 'package:drive_thru/src/services/FetshingData.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
@@ -46,6 +48,73 @@ class DashBoard extends StatefulWidget {
 class _DashBoardState extends State<DashBoard> {
   int _selectedIndex = 0;
   int _selectedcat = 1;
+  Firestore _firestore = Firestore.instance;
+  List<DocumentSnapshot> _resturants = [];
+  bool isLoading = false;
+  bool hasMore = true;
+  int _viewCount = 10;
+  DocumentSnapshot _lastDocument;
+  ScrollController _scrollController = ScrollController();
+
+
+  getProducts() async {  
+   if (!hasMore) {  
+     print('No More Products');  
+     return;  
+   }  
+   if (isLoading) {  
+     return;  
+   }  
+   setState(() {  
+     isLoading = true;  
+   });  
+   QuerySnapshot querySnapshot;  
+   if (_lastDocument == null) {  
+     querySnapshot = await _firestore
+        .collection('Orders')
+        .orderBy("Item Name")
+        .limit(_viewCount).
+        getDocuments(); 
+   } else {  
+     querySnapshot = await _firestore
+        .collection('Orders')
+        .orderBy("Item Name")
+         .startAfterDocument(_lastDocument)  
+        .limit(_viewCount)
+        .getDocuments();  
+     print('#########################');  
+   }  
+   if (querySnapshot.documents.length < _viewCount) {  
+     hasMore = false;  
+   }  
+   _lastDocument = querySnapshot.documents[querySnapshot.documents.length - 1];  
+   _resturants.addAll(querySnapshot.documents);  
+   setState(() {  
+     isLoading = false;  
+   });  
+ }
+
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    //_getResturants();
+    getProducts();
+    _scrollController.addListener(() {  
+     double maxScroll = _scrollController.position.maxScrollExtent;  
+     double currentScroll = _scrollController.position.pixels;  
+     double delta = MediaQuery.of(context).size.height * 0.20;  
+     if (maxScroll - currentScroll <= delta) {  
+       setState(() {
+          getProducts();
+       });  
+     }  
+   });
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     final _tabs = [
@@ -55,7 +124,8 @@ class _DashBoardState extends State<DashBoard> {
       Text('Tab4'),
       Text('Tab5'),
     ];
-    final _widgets = [reswidget(context), resturants(context),fastfood(context)];
+    final _widgets = [reswidget(context), resturants(context),];
+    //fastfood(context)];
     return Scaffold(
         backgroundColor: bgColor,
         appBar: AppBar(
@@ -120,14 +190,14 @@ class _DashBoardState extends State<DashBoard> {
             ListTile(
               title: Text('Add restaurant'),
               onTap: () {
-                Navigator.pushReplacement(context, PageTransition(type: PageTransitionType.leftToRightWithFade, child: AddResturant()));
+                Navigator.push(context, PageTransition(type: PageTransitionType.leftToRightWithFade, child: AddResturant()));
               },
             ),
             ListTile(
               title: Text('Settings'),
               
               onTap: () {
-                Navigator.pop(context);
+                Navigator.push(context, PageTransition(type: PageTransitionType.leftToRightWithFade, child: FetshingData()));
                 
               },
             ),
@@ -135,7 +205,7 @@ class _DashBoardState extends State<DashBoard> {
               title: Text('Timer Page'),
               
               onTap: () {
-                Navigator.pushReplacement(context, PageTransition(type: PageTransitionType.leftToRightWithFade, child: TimerPage()));
+                Navigator.push(context, PageTransition(type: PageTransitionType.leftToRightWithFade, child: TimerPage()));
                 
               },
             ),
@@ -350,7 +420,57 @@ class _DashBoardState extends State<DashBoard> {
   }
 
   Widget resturants(BuildContext context) {
-    return Container(
+    return 
+  //   Scaffold(  
+  //    appBar: AppBar(  
+  //      title: Text('Resturants'),
+  //      leading: BackButton(color: darkText,onPressed:(){ Navigator.pushReplacement(context, PageTransition(type: PageTransitionType.leftToRight, child:DashBoard()));},)  
+  //    ),  
+  //    body: Column(children: [  
+  //      Expanded(  
+  //        child: _resturants.length == 0  
+  //            ? Center(  
+  //                child: Text('No Data...'),  
+  //              )  
+  //            : ListView.builder(  
+  //                controller: _scrollController,  
+  //                itemCount: _resturants.length,  
+  //                itemBuilder: (context, index) {  
+  //                  return ListTile(title: Text( _resturants[index].data['Item Name']), 
+  //                   onTap: () {
+  //                     Navigator.push(
+  //                       context,
+  //                       MaterialPageRoute(
+  //                         builder: (context) {
+  //                           return new Menu(
+  //                             productData: resturantsdata[0],
+  //                           );
+  //                         },
+  //                       ),
+  //                     );
+  //                   }   
+  //                  );  
+  //                },  
+  //              ),  
+  //      ),  
+  //      isLoading  
+  //          ? Container(  
+  //              width: MediaQuery.of(context).size.width,  
+  //              padding: EdgeInsets.all(5),  
+  //              color: Colors.yellowAccent,  
+  //              child: Text(  
+  //                'Loading',  
+  //                textAlign: TextAlign.center,  
+  //                style: TextStyle(  
+  //                  fontWeight: FontWeight.bold,  
+  //                ),  
+  //              ),  
+  //            )  
+  //          : Container()  
+  //    ]),  
+  //  );  
+    
+    Container(
         height: 400,
         padding: const EdgeInsets.all(5),
         child: ListView(children: <Widget>[
@@ -454,82 +574,82 @@ class _DashBoardState extends State<DashBoard> {
 
 
 
-Widget fastfood(BuildContext context) {
-    return Container(
-        height: 400,
-        padding: const EdgeInsets.all(5),
-        child: ListView(children: <Widget>[
-          Container(
-              child: Column(children: <Widget>[
-                foodItem(foods[0], onTapped: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) {
-                                          return new Menu(
-                                            productData: foods[0],
-                                          );
-                                        },
-                                      ),
-                                    );
-                                  }, onLike: () {
-                                    setState(() {
-                                      (foods[0].userLiked)?foods[0].userLiked=false: foods[0].userLiked=true;
-                                    });
-                                  }),
-                                  foodItem(foods[1], onTapped: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) {
-                                          return new Menu(
-                                            productData: foods[1],
-                                          );
-                                        },
-                                      ),
-                                    );
-                                  }, onLike: () {
-                                    setState(() {
-                                      (foods[1].userLiked)?foods[1].userLiked=false: foods[1].userLiked=true;
-                                    });
-                                  }),
-                                  foodItem(foods[2], onTapped: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) {
-                                          return new Menu(
-                                            productData: foods[2],
-                                          );
-                                        },
-                                      ),
-                                    );
-                                  }, onLike: () {
-                                     setState(() {
-                                      (foods[2].userLiked)?foods[2].userLiked=false: foods[2].userLiked=true;
-                                    });
-                                  }),
-                                foodItem(foods[3], onTapped: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) {
-                                          return new Menu(
-                                            productData: foods[2],
-                                          );
-                                        },
-                                      ),
-                                    );
-                                  }, onLike: () {
-                                    setState(() {
-                                      (foods[3].userLiked)?foods[3].userLiked=false: foods[3].userLiked=true;
-                                    });
-                                  })
+// Widget fastfood(BuildContext context) {
+//     return Container(
+//         height: 400,
+//         padding: const EdgeInsets.all(5),
+//         child: ListView(children: <Widget>[
+//           Container(
+//               child: Column(children: <Widget>[
+//                 foodItem(foods[0], onTapped: () {
+//                                     Navigator.push(
+//                                       context,
+//                                       MaterialPageRoute(
+//                                         builder: (context) {
+//                                           return new Menu(
+//                                             productData: foods[0],
+//                                           );
+//                                         },
+//                                       ),
+//                                     );
+//                                   }, onLike: () {
+//                                     setState(() {
+//                                       (foods[0].userLiked)?foods[0].userLiked=false: foods[0].userLiked=true;
+//                                     });
+//                                   }),
+//                                   foodItem(foods[1], onTapped: () {
+//                                     Navigator.push(
+//                                       context,
+//                                       MaterialPageRoute(
+//                                         builder: (context) {
+//                                           return new Menu(
+//                                             productData: foods[1],
+//                                           );
+//                                         },
+//                                       ),
+//                                     );
+//                                   }, onLike: () {
+//                                     setState(() {
+//                                       (foods[1].userLiked)?foods[1].userLiked=false: foods[1].userLiked=true;
+//                                     });
+//                                   }),
+//                                   foodItem(foods[2], onTapped: () {
+//                                     Navigator.push(
+//                                       context,
+//                                       MaterialPageRoute(
+//                                         builder: (context) {
+//                                           return new Menu(
+//                                             productData: foods[2],
+//                                           );
+//                                         },
+//                                       ),
+//                                     );
+//                                   }, onLike: () {
+//                                      setState(() {
+//                                       (foods[2].userLiked)?foods[2].userLiked=false: foods[2].userLiked=true;
+//                                     });
+//                                   }),
+//                                 foodItem(foods[3], onTapped: () {
+//                                     Navigator.push(
+//                                       context,
+//                                       MaterialPageRoute(
+//                                         builder: (context) {
+//                                           return new Menu(
+//                                             productData: foods[2],
+//                                           );
+//                                         },
+//                                       ),
+//                                     );
+//                                   }, onLike: () {
+//                                     setState(() {
+//                                       (foods[3].userLiked)?foods[3].userLiked=false: foods[3].userLiked=true;
+//                                     });
+//                                   })
 
 
-          ]))
-        ]));
-  }
+//           ]))
+//         ]));
+//   }
 
 
 }

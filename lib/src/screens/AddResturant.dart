@@ -1,3 +1,9 @@
+import 'dart:io';
+import 'package:drive_thru/src/screens/Image_picker.dart';
+import 'package:drive_thru/src/services/resturantManagement.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:page_transition/page_transition.dart';
+import 'package:path/path.dart' as Path;
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import '../shared/styles.dart';
@@ -11,7 +17,8 @@ class User {
   String firstName = '';
   String lastName = '';
   String restname = '';
-  String zipcode = '';
+  String latitude = '';
+  String longitude = '';
   String gmNum = '';
   String gmName = '';
   String branNum = '';
@@ -24,6 +31,7 @@ class User {
   
 }
 
+
 class AddResturant extends StatefulWidget {
   @override
   _AddResturantState createState() => _AddResturantState();
@@ -35,8 +43,25 @@ final _formKey = GlobalKey<FormState>();
 
 class _AddResturantState extends State <AddResturant> {
   final _user = User();
-  
+  File _image = new File('/images/6.png'); 
 
+  
+  Map<String, dynamic> restmap = {
+    'firstName' : '',
+    'lastName' : '',
+    'restname' : '',
+    'latitude' : '',
+    'longitude' : '',
+    'gmNum' : '',
+    'gmName' : '',
+    'branNum' : '',
+    'gmMail': '',
+    'hqLocation': '',
+    'hotLine': '',
+    'restNum': '',
+    'restNum2': '',
+    'newsletter' : false,
+  };
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -88,14 +113,24 @@ class _AddResturantState extends State <AddResturant> {
                                   setState(() => _user.hqLocation = val)),
                                   TextFormField(
                               decoration:
-                                  InputDecoration(labelText: 'Kindly enter the Zip Code'),
+                                  InputDecoration(labelText: 'Kindly enter the latitude'),
                               validator: (value) {
                                 if (value.isEmpty) {
-                                  return 'Please enter the Zip Code';
+                                  return 'Please enter the latitude';
                                 }
                               },
                               onSaved: (val) =>
-                                  setState(() => _user.zipcode = val)),
+                                  setState(() => _user.latitude = val)),
+                                  TextFormField(
+                              decoration:
+                                  InputDecoration(labelText: 'Kindly enter the longitude'),
+                              validator: (value) {
+                                if (value.isEmpty) {
+                                  return 'Please enter the longitude';
+                                }
+                              },
+                              onSaved: (val) =>
+                                  setState(() => _user.longitude = val)),
                                   TextFormField(
                               decoration:
                                   InputDecoration(labelText: "Restaurant's Hotline (optional)"),
@@ -122,6 +157,16 @@ class _AddResturantState extends State <AddResturant> {
                               },
                               onSaved: (val) =>
                                   setState(() => _user.restNum2 = val)),
+                              //     TextFormField(
+                              // decoration:
+                              //     InputDecoration(labelText: "Restaurant's image"),
+                              // validator: (value) {
+                              //   if (value.isEmpty) {
+                              //     return "Please enter the Restaurant's image";
+                              //   }
+                              // },
+                              // onSaved: (val) =>
+                              //     setState(() => _user.imageURL = val)),
                                   TextFormField(
                               decoration:
                                   InputDecoration(labelText: "Kindly eneter the GM's name"),
@@ -166,20 +211,38 @@ class _AddResturantState extends State <AddResturant> {
                               padding: const EdgeInsets.symmetric(
                                   vertical: 16.0, horizontal: 16.0),
                                   child: froyoOutlineBtn(('Submit'),( ){
+                                    // uploadFile();
                                     final form = _formKey.currentState;
                                     if (form.validate()) {
                                       form.save();
                                     
                                     }
-
+                                    restmap['firstName'] = _user.firstName;
+                                    restmap['lastName'] = _user.lastName;
+                                    restmap['restname'] = _user.restname;
+                                    restmap['latitude'] = _user.latitude;
+                                    restmap['longitude'] = _user.longitude;
+                                    restmap['gmNum'] = _user.gmNum;
+                                    restmap['gmName'] = _user.gmName;
+                                    restmap['branNum'] = _user.branNum;
+                                    restmap['gmMail'] = _user.gmMail;
+                                    restmap['hqLocation'] = _user.hqLocation;
+                                    restmap['hotLine'] = _user.hotLine;
+                                    restmap['restNum'] = _user.restNum;
+                                    restmap['restNum2'] = _user.restNum2;
+                                    restmap['newsletter'] = _user.newsletter;
+                                    print(_user);
+                                    //Image_picker();
+                                    ResturantManagement().addNewResturant(context, restmap);
+                                    //Navigator.push(context, PageTransition(type: PageTransitionType.leftToRight, child: Image_picker()));
                                   })
-                                  ),
-              ])
+                          ),
+                        ])
+                )
             )
           )
+        ]
         )
-      ]
-    )
     );
   }
 }

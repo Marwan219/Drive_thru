@@ -10,12 +10,14 @@ import 'package:smooth_star_rating/smooth_star_rating.dart';
 import 'package:drive_thru/src/screens/AddResturant.dart';
 import 'package:drive_thru/src/screens/HomePage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'Buy.dart';
 import 'Timerpage.dart';
 import 'Dashboard.dart';
 
 class ProductPage extends StatefulWidget {
   final String pageTitle;
   final Product productData;
+  //final int time1;
 
   ProductPage({Key key, this.pageTitle, this.productData}) : super(key: key);
 
@@ -192,7 +194,7 @@ class _ProductPageState extends State<ProductPage> {
                                 'Units' : _quantity 
                               }).then((value){
                                 //Navigator.of(context).pop();
-                                Navigator.pushReplacement(context, PageTransition(type: PageTransitionType.leftToRight, child: TimerPage()));
+                                Navigator.pushReplacement(context, PageTransition(type: PageTransitionType.leftToRight, child: Buy(pageTitle: widget.pageTitle,productData: widget.productData,product_quantity:_quantity,)));
                               }).catchError((e){print(e);});
                             }),
                           ),

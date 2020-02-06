@@ -6,6 +6,7 @@ import '../shared/styles.dart';
 import '../shared/colors.dart';
 import 'package:page_transition/page_transition.dart';
 import './SignUpPage.dart';
+import 'Dashboard.dart';
 
 class SignInPage extends StatefulWidget {
   final String pageTitle;
@@ -138,7 +139,7 @@ class _SignInPageState extends State<SignInPage> {
                       email: _email,
                       password: _password
                     ).then((user){
-                      Navigator.pushReplacement(context, PageTransition(type: PageTransitionType.rightToLeft, child: Menu()));
+                      Navigator.pushReplacement(context, PageTransition(type: PageTransitionType.rightToLeft, child: DashBoard()));
                     }).catchError((e) {
                       setState((){
                         loading = false;
