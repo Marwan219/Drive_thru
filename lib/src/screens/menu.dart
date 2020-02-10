@@ -9,7 +9,12 @@ import 'package:drive_thru/src/screens/AddResturant.dart';
 import 'package:drive_thru/src/screens/HomePage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:page_transition/page_transition.dart';
-
+import '../../generated/intl/l10n.dart';
+import '../../generated/intl/helper.dart';
+import '../services/flutter_restart.dart';
+import 'package:drive_thru/src/screens/Timerpage.dart';
+import 'package:drive_thru/src/services/FetshingData.dart';
+import '../shared/language_change.dart';
 
 List<Product> foods = [
   Product(
@@ -38,17 +43,74 @@ List<Product> foods = [
       discount: 14)
 ];
 
+
+
 class Menu extends StatefulWidget {
   final String pageTitle;
   final Product productData;
 
   Menu({Key key, this.pageTitle, this.productData}) : super(key: key);
-
+ 
   @override
   _MenuState createState() => _MenuState();
 }
 
 class _MenuState extends State<Menu> {
+
+   Future<void> languageChange() async {
+  return showDialog<void>(
+    context: context,
+    barrierDismissible: false, // user must tap button!
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title:Center(child:Text(AppLocalizations.of(context).language),) ,
+        // elevation: 40.0,
+      
+        actions: <Widget>[
+          Column(
+            children: <Widget>[
+             Container(
+               width:MediaQuery.of(context).size.width   ,
+               child:OutlineButton(
+              shape: new Border.all(width: 2,color: Colors.black),
+              child: new Text("English"), onPressed: (){
+                  this.setState((){
+                   helper.onLocaleChanged(new Locale("en"));
+                    language = "en";
+                   RestartWidget.of(context).restartApp();
+                  });}),),
+                 
+                     Divider(
+                              color: Colors.black,
+                            ),
+               Container(
+                 width:MediaQuery.of(context).size.width,
+                 child: OutlineButton(
+                shape: new Border.all(width: 2,color: Colors.black),
+              child: new Text("عربى"), onPressed: (){
+                  this.setState((){
+                   helper.onLocaleChanged(new Locale("ar"));
+                    language = "ar";
+                   RestartWidget.of(context).restartApp();
+                  });}),),
+              
+                  Divider(),
+              
+            RaisedButton(
+                child: Text(
+                  "Cancel",
+                  style: TextStyle(color: Colors.white),
+                ),
+                onPressed: () => Navigator.pop(context),
+              ),
+            ],
+          )
+
+        ],
+      );
+    },
+  );
+}
   double _rating = 4;
   @override
   Widget build(BuildContext context) {
@@ -63,7 +125,7 @@ class _MenuState extends State<Menu> {
           ),
           title: Text(widget.productData.name, style: h4),
         ),
-        drawer: new Drawer(  
+  drawer: new Drawer(  
         child: ListView(
 
           padding: EdgeInsets.zero,
@@ -75,52 +137,69 @@ class _MenuState extends State<Menu> {
               ),
             ),
             ListTile(
-              title: Text('Home Page'),
+              title: Text(''),
               onTap: () {
                 Navigator.pop(context);
               },
             ),
             ListTile(
-              title: Text('My Profile'),
+              title: Text(AppLocalizations.of(context).homePage),
               onTap: () {
                 Navigator.pop(context);
               },
             ),
             ListTile(
-              title: Text('My Cart'),
+              title: Text(AppLocalizations.of(context).myProfile),
               
               onTap: () {
                 Navigator.pop(context);
               },
             ),
             ListTile(
-              title: Text('Store'),
+              title: Text(AppLocalizations.of(context).store),
               onTap: () {
                 Navigator.pop(context);
               },
             ),
             ListTile(
-              title: Text('Add restaurant'),
+              title: Text(AppLocalizations.of(context).addResturant),
               onTap: () {
-                Navigator.pushReplacement(context, PageTransition(type: PageTransitionType.leftToRightWithFade, child: AddResturant()));
+                Navigator.push(context, PageTransition(type: PageTransitionType.leftToRightWithFade, child: AddResturant()));
               },
             ),
             ListTile(
-              title: Text('Settings'),
+              title: Text(AppLocalizations.of(context).setting),
               
               onTap: () {
-                Navigator.pop(context);
+                Navigator.push(context, PageTransition(type: PageTransitionType.leftToRightWithFade, child: FetshingData()));
                 
               },
             ),
             ListTile(
-              title: Text('Sign Out'),
+              title: Text(AppLocalizations.of(context).timerPage),
+              
+              onTap: () {
+                Navigator.push(context, PageTransition(type: PageTransitionType.leftToRightWithFade, child: TimerPage()));
+                
+              },
+            ),
+            ListTile(
+              title: Text(AppLocalizations.of(context).language),
+              onTap: () {
+                this.languageChange();
+              },
+            ),
+               Divider(
+                              color: Colors.black,
+                            ),
+            ListTile(
+              title: Text(AppLocalizations.of(context).signOut),
               onTap: () {
                 FirebaseAuth.instance.signOut().then((value){
                 Navigator.pushReplacement(context, PageTransition(type: PageTransitionType.leftToRightWithFade, child: HomePage()));
                 }).catchError((e){print(e);});
               },
-            ),
+            )
           ],
         ),
       ),
@@ -223,7 +302,7 @@ class _MenuState extends State<Menu> {
                             // color: Colors.white),
                        ),
                         child:Center(child: Text(
-                      "Menu",
+                      AppLocalizations.of(context).menutxt,
                       style: TextStyle(
                         //  fontFamily: 'Pacifico',
                         fontSize: 16,
