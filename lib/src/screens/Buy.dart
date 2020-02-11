@@ -70,6 +70,13 @@ import './ProductPage.dart';
 
 class _BuyState extends State<Buy> {
   @override
+ int _coin1 = 0;
+ int _coin5 = 0;
+ int _coin10 = 0;
+ int _coin20 = 0;
+ int _coin50 = 0;
+ int _coin100 = 0;
+ int _coin200 = 0;
 
    SingingCharacter _character = SingingCharacter.walk  ;
 
@@ -80,7 +87,7 @@ class _BuyState extends State<Buy> {
           elevation: 0,
           leading: IconButton(
             onPressed: () {
-              Navigator.pushReplacement(context, PageTransition(type: PageTransitionType.leftToRightWithFade, child: Menu()));
+              Navigator.pushReplacement(context, PageTransition(type: PageTransitionType.leftToRightWithFade, child: ProductPage()));
             },
             iconSize: 21,
             icon: Icon(Icons.arrow_back_ios,color: white,)
@@ -181,9 +188,9 @@ class _BuyState extends State<Buy> {
           , 
                     /// s  
                     /// 
-      //               FlatButton(
-      //                 child: Text("Choose Available coins"),
-      //                 onPressed:(){
+            //           FlatButton(
+          //             child: Text("Choose Available coins"),
+        //               onPressed:(){
       //     //              AlertDialog alert = AlertDialog(
       //     //               title: Text("coins"),
       //     //               content:Container(
@@ -489,7 +496,8 @@ class _BuyState extends State<Buy> {
           margin: EdgeInsets.only(top: 5, bottom:2),
             decoration: rescardstyle,
             child:Center(child:
-        Text("Choose Available coins",style: h4,))),         
+        Text("Choose Available coins",style: h4,))),
+                 
 
         Container(
           height: 200,
@@ -501,129 +509,470 @@ class _BuyState extends State<Buy> {
 
                 
                 Row(children: <Widget>[
+                  
+                  Container(
+                    
+                  )
+                  
 
-                    Text(widget.coins[0]["value"].toString(), style: h5,), 
-               Spacer(flex:5,),
-                  Switch(
-                           value: widget.coins[0]["checked"],
-                               onChanged: (value) {
-                              setState(() {
-                                      widget.coins[0]["checked"] = value;
-                                       });
-                                    },
-                                    activeTrackColor: Colors.lightGreenAccent, 
-                                    activeColor: Colors.green,
-                                  ),
+              //       Text(widget.coins[0]["value"].toString(), style: h5,), 
+              //  Spacer(flex:5,),
+              //     Switch(
+              //              value: widget.coins[0]["checked"],
+              //                  onChanged: (value) {
+              //                 setState(() {
+              //                         widget.coins[0]["checked"] = value;
+              //                          });
+              //                       },
+              //                       activeTrackColor: Colors.lightGreenAccent, 
+              //                       activeColor: Colors.green,
+              //                     ),
                 
 
                 ],),
-                  Row(children: <Widget>[
+                //  Container(
+                //                   child: Center(child:Text('1', style: h4,),
+                //                   // margin: EdgeInsets.only(bottom: 15),
+                //                   ) 
+                //                 ),
+                 Row(
+                   
+                  
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  
+                                  children: <Widget>[
+                                    Container(
+                                  child:Text('1', style: h4,),
+                                   margin: EdgeInsets.only(bottom: 15),
+                                   
+                                ),
+                                Spacer(flex:5,),
+                                    Container(
+                                  
+                                      width: 55,
+                                      height: 55,
+                                      child: OutlineButton(
+                                        onPressed: () {
+                                          setState(() {
+                                            _coin1 += 1;
+                                          });
+                                        },
+                                        child: Icon(Icons.add),
+                                      ),
+                                      
+                                    ),
+                                    Container(
+                                      margin:
+                                          EdgeInsets.only(left: 20, right: 20),
+                                      child: Text(_coin1.toString(), style: h3),
+                                    ),
+                                    Container(
+                                      width: 55,
+                                      height: 55,
+                                      child: OutlineButton(
+                                        onPressed: () {
+                                          setState(() {
+                                           if(_coin1 == 0) return;
+                                             _coin1 -= 1; 
+                                          });
+                                        },
+                                        child: Icon(Icons.remove),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                                 
+                                 Row(
+                  
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  
+                                  children: <Widget>[
+                                    Container(
+                                  child:Text('5', style: h4,),
+                                  margin: EdgeInsets.only(bottom: 15),
+                                  
+                                ),
+                                Spacer(flex:5,),
+                                    Container(
+                                  
+                                      width: 55,
+                                      height: 55,
+                                      child: OutlineButton(
+                                        onPressed: () {
+                                          setState(() {
+                                            _coin5 += 1;
+                                          });
+                                        },
+                                        child: Icon(Icons.add),
+                                      ),
+                                      
+                                    ),
+                                    Container(
+                                      margin:
+                                          EdgeInsets.only(left: 20, right: 20),
+                                      child: Text(_coin5.toString(), style: h3),
+                                    ),
+                                    Container(
+                                      width: 55,
+                                      height: 55,
+                                      child: OutlineButton(
+                                        onPressed: () {
+                                          setState(() {
+                                           if(_coin5 == 0) return;
+                                             _coin5 -= 1; 
+                                          });
+                                        },
+                                        child: Icon(Icons.remove),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                                
+                                 Row(
+                  
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  
+                                  children: <Widget>[
+                                    Container(
+                                  child:Text('10', style: h4,),
+                                  margin: EdgeInsets.only(bottom: 15),
+                                  
+                                ),
+                                  Spacer(flex:5,),
+                                    Container(
+                                      
+                                  
+                                      width: 55,
+                                      height: 55,
+                                      child: OutlineButton(
+                                        onPressed: () {
+                                          setState(() {
+                                            _coin10 += 1;
+                                          });
+                                        },
+                                        child: Icon(Icons.add),
+                                      ),
+                                      
+                                    ),
+                                    Container(
+                                      margin:
+                                          EdgeInsets.only(left: 20, right: 20),
+                                      child: Text(_coin10.toString(), style: h3),
+                                    ),
+                                    Container(
+                                      width: 55,
+                                      height: 55,
+                                      child: OutlineButton(
+                                        onPressed: () {
+                                          setState(() {
+                                           if(_coin10 == 0) return;
+                                             _coin10 -= 1; 
+                                          });
+                                        },
+                                        child: Icon(Icons.remove),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                               
+                                 Row(
+                  
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  
+                                  children: <Widget>[
+                                     Container(
+                                  child:Text('20', style: h4,),
+                                  margin: EdgeInsets.only(bottom: 15),
+                                   
+                                ),
+                                Spacer(flex:5,),
+                                    Container(
+                                  
+                                      width: 55,
+                                      height: 55,
+                                      child: OutlineButton(
+                                        onPressed: () {
+                                          setState(() {
+                                            _coin20 += 1;
+                                          });
+                                        },
+                                        child: Icon(Icons.add),
+                                      ),
+                                      
+                                    ),
+                                    Container(
+                                      margin:
+                                          EdgeInsets.only(left: 20, right: 20),
+                                      child: Text(_coin20.toString(), style: h3),
+                                    ),
+                                    Container(
+                                      width: 55,
+                                      height: 55,
+                                      child: OutlineButton(
+                                        onPressed: () {
+                                          setState(() {
+                                           if(_coin20 == 0) return;
+                                             _coin20 -= 1; 
+                                          });
+                                        },
+                                        child: Icon(Icons.remove),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                               
+                                 Row(
+                  
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  
+                                  children: <Widget>[
+                                     Container(
+                                  child:Text('50', style: h4,),
+                                   margin: EdgeInsets.only(bottom: 15),
+                                   
+                                ),
+                                Spacer(flex:5,),
+                                    Container(
+                                  
+                                      width: 55,
+                                      height: 55,
+                                      child: OutlineButton(
+                                        onPressed: () {
+                                          setState(() {
+                                            _coin50 += 1;
+                                          });
+                                        },
+                                        child: Icon(Icons.add),
+                                      ),
+                                      
+                                    ),
+                                    Container(
+                                      margin:
+                                          EdgeInsets.only(left: 20, right: 20),
+                                      child: Text(_coin50.toString(), style: h3),
+                                    ),
+                                    Container(
+                                      width: 55,
+                                      height: 55,
+                                      child: OutlineButton(
+                                        onPressed: () {
+                                          setState(() {
+                                           if(_coin50 == 0) return;
+                                             _coin50 -= 1; 
+                                          });
+                                        },
+                                        child: Icon(Icons.remove),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                                
+                                 Row(
+                  
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  
+                                  children: <Widget>[
+                                    Container(
+                                  child:Text('100', style: h4,),
+                                   margin: EdgeInsets.only(bottom: 15),
+                                   
+                                ),
+                                Spacer(flex:5,),
+                                    Container(
+                                  
+                                      width: 55,
+                                      height: 55,
+                                      child: OutlineButton(
+                                        onPressed: () {
+                                          setState(() {
+                                            _coin100 += 1;
+                                          });
+                                        },
+                                        child: Icon(Icons.add),
+                                      ),
+                                      
+                                    ),
+                                    Container(
+                                      margin:
+                                          EdgeInsets.only(left: 20, right: 20),
+                                      child: Text(_coin100.toString(), style: h3),
+                                    ),
+                                    Container(
+                                      width: 55,
+                                      height: 55,
+                                      child: OutlineButton(
+                                        onPressed: () {
+                                          setState(() {
+                                           if(_coin100 == 0) return;
+                                             _coin100 -= 1; 
+                                          });
+                                        },
+                                        child: Icon(Icons.remove),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                                
+                                 Row(
+                  
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  
+                                  children: <Widget>[
 
-                    Text(widget.coins[1]["value"].toString(), style: h5,), 
-               Spacer(flex:5,),
-                  Switch(
-                           value: widget.coins[1]["checked"],
-                               onChanged: (value) {
-                              setState(() {
-                                      widget.coins[1]["checked"] = value;
-                                       });
-                                    },
-                                    activeTrackColor: Colors.lightGreenAccent, 
-                                    activeColor: Colors.green,
-                                  ),
+                                    Container(
+                                  child:Text('200', style: h4,),
+                                  margin: EdgeInsets.only(bottom: 15),
+                                   
+                                ),
+                                Spacer(flex:5,),
+                                    Container(
+                                  
+                                      width: 55,
+                                      height: 55,
+                                      child: OutlineButton(
+                                        onPressed: () {
+                                          setState(() {
+                                            _coin200 += 1;
+                                          });
+                                        },
+                                        child: Icon(Icons.add),
+                                      ),
+                                      
+                                    ),
+                                    Container(
+                                      margin:
+                                          EdgeInsets.only(left: 20, right: 20),
+                                      child: Text(_coin200.toString(), style: h3),
+                                    ),
+                                    Container(
+                                      width: 55,
+                                      height: 55,
+                                      child: OutlineButton(
+                                        onPressed: () {
+                                          setState(() {
+                                           if(_coin200 == 0) return;
+                                             _coin200 -= 1; 
+                                          });
+                                        },
+                                        child: Icon(Icons.remove),
+                                      ),
+                                    )
+                                  ],
+                                ),
+          //         Row(children: <Widget>[
+
+          //           Text(widget.coins[1]["value"].toString(), style: h5,), 
+          //      Spacer(flex:5,),
+          //         Switch(
+          //                  value: widget.coins[1]["checked"],
+          //                      onChanged: (value) {
+          //                     setState(() {
+          //                             widget.coins[1]["checked"] = value;
+          //                              });
+          //                           },
+          //                           activeTrackColor: Colors.lightGreenAccent, 
+          //                           activeColor: Colors.green,
+          //                         ),
                 
 
-                ],),
+          //       ],),
 
-          Row(children: <Widget>[
+          // Row(children: <Widget>[
 
-                    Text(widget.coins[2]["value"].toString(), style: h5,), 
-               Spacer(flex:5,),
-                  Switch(
-                           value: widget.coins[2]["checked"],
-                               onChanged: (value) {
-                              setState(() {
-                                      widget.coins[2]["checked"] = value;
-                                       });
-                                    },
-                                    activeTrackColor: Colors.lightGreenAccent, 
-                                    activeColor: Colors.green,
-                                  ),
+          //           Text(widget.coins[2]["value"].toString(), style: h5,), 
+          //      Spacer(flex:5,),
+          //         Switch(
+          //                  value: widget.coins[2]["checked"],
+          //                      onChanged: (value) {
+          //                     setState(() {
+          //                             widget.coins[2]["checked"] = value;
+          //                              });
+          //                           },
+          //                           activeTrackColor: Colors.lightGreenAccent, 
+          //                           activeColor: Colors.green,
+          //                         ),
                 
 
-                ],),
+          //       ],),
 
-                  Row(children: <Widget>[
+          //         Row(children: <Widget>[
 
-                    Text(widget.coins[3]["value"].toString(), style: h5,), 
-               Spacer(flex:5,),
-                  Switch(
-                           value: widget.coins[3]["checked"],
-                               onChanged: (value) {
-                              setState(() {
-                                      widget.coins[3]["checked"] = value;
-                                       });
-                                    },
-                                    activeTrackColor: Colors.lightGreenAccent, 
-                                    activeColor: Colors.green,
-                                  ),
+          //           Text(widget.coins[3]["value"].toString(), style: h5,), 
+          //      Spacer(flex:5,),
+          //         Switch(
+          //                  value: widget.coins[3]["checked"],
+          //                      onChanged: (value) {
+          //                     setState(() {
+          //                             widget.coins[3]["checked"] = value;
+          //                              });
+          //                           },
+          //                           activeTrackColor: Colors.lightGreenAccent, 
+          //                           activeColor: Colors.green,
+          //                         ),
                 
 
-                ],),
+          //       ],),
 
 
-                  Row(children: <Widget>[
+          //         Row(children: <Widget>[
 
-                    Text(widget.coins[4]["value"].toString(), style: h5,), 
-               Spacer(flex:5,),
-                  Switch(
-                           value: widget.coins[4]["checked"],
-                               onChanged: (value) {
-                              setState(() {
-                                      widget.coins[4]["checked"] = value;
-                                       });
-                                    },
-                                    activeTrackColor: Colors.lightGreenAccent, 
-                                    activeColor: Colors.green,
-                                  ),
+          //           Text(widget.coins[4]["value"].toString(), style: h5,), 
+          //      Spacer(flex:5,),
+          //         Switch(
+          //                  value: widget.coins[4]["checked"],
+          //                      onChanged: (value) {
+          //                     setState(() {
+          //                             widget.coins[4]["checked"] = value;
+          //                              });
+          //                           },
+          //                           activeTrackColor: Colors.lightGreenAccent, 
+          //                           activeColor: Colors.green,
+          //                         ),
                 
 
-                ],),
+          //       ],),
 
-                  Row(children: <Widget>[
+          //         Row(children: <Widget>[
 
-                    Text(widget.coins[5]["value"].toString(), style: h5,), 
-               Spacer(flex:5,),
-                  Switch(
-                           value: widget.coins[5]["checked"],
-                               onChanged: (value) {
-                              setState(() {
-                                      widget.coins[5]["checked"] = value;
-                                       });
-                                    },
-                                    activeTrackColor: Colors.lightGreenAccent, 
-                                    activeColor: Colors.green,
-                                  ),
+          //           Text(widget.coins[5]["value"].toString(), style: h5,), 
+          //      Spacer(flex:5,),
+          //         Switch(
+          //                  value: widget.coins[5]["checked"],
+          //                      onChanged: (value) {
+          //                     setState(() {
+          //                             widget.coins[5]["checked"] = value;
+          //                              });
+          //                           },
+          //                           activeTrackColor: Colors.lightGreenAccent, 
+          //                           activeColor: Colors.green,
+          //                         ),
                 
 
-                ],),
-                  Row(children: <Widget>[
+          //       ],),
+          //         Row(children: <Widget>[
 
-                    Text(widget.coins[6]["value"].toString(), style: h5,), 
-               Spacer(flex:5,),
-                  Switch(
-                           value: widget.coins[6]["checked"],
-                               onChanged: (value) {
-                              setState(() {
-                                     widget.coins[6]["checked"] = value;
-                                       });
-                                    },
-                                    activeTrackColor: Colors.lightGreenAccent, 
-                                    activeColor: Colors.green,
-                                  ),
+          //           Text(widget.coins[6]["value"].toString(), style: h5,), 
+          //      Spacer(flex:5,),
+          //         Switch(
+          //                  value: widget.coins[6]["checked"],
+          //                      onChanged: (value) {
+          //                     setState(() {
+          //                            widget.coins[6]["checked"] = value;
+          //                              });
+          //                           },
+          //                           activeTrackColor: Colors.lightGreenAccent, 
+          //                           activeColor: Colors.green,
+          //                         ),
                 
 
-                ],)
+          //       ],)
 
               ],
             ),

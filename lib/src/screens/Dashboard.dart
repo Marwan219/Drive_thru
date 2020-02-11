@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:drive_thru/src/screens/AddMenue.dart';
 import 'package:drive_thru/src/screens/AddResturant.dart';
 import 'package:drive_thru/src/screens/HomePage.dart';
 import 'package:drive_thru/src/screens/Timerpage.dart';
@@ -182,9 +183,9 @@ class _DashBoardState extends State<DashBoard> {
               },
             ),
             ListTile(
-              title: Text('Store'),
+              title: Text('Add Menue'),
               onTap: () {
-                Navigator.pop(context);
+                 Navigator.push(context, PageTransition(type: PageTransitionType.leftToRightWithFade, child: AddMenue()));
               },
             ),
             ListTile(
@@ -476,7 +477,7 @@ class _DashBoardState extends State<DashBoard> {
         child: ListView(children: <Widget>[
           Container(
               child: Column(children: <Widget>[
-            resitem(resturantsdata[0], onTapped: () {
+            resitem(resturantsdata[0], context: context, onTapped: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -494,7 +495,7 @@ class _DashBoardState extends State<DashBoard> {
                     : resturantsdata[0].userLiked = true;
               });
             }),
-            resitem(resturantsdata[1], onTapped: () {
+            resitem(resturantsdata[1], context: context, onTapped: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -512,7 +513,7 @@ class _DashBoardState extends State<DashBoard> {
                     : resturantsdata[1].userLiked = true;
               });
             }),
-            resitem(resturantsdata[2], onTapped: () {
+            resitem(resturantsdata[2], context: context, onTapped: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -530,7 +531,7 @@ class _DashBoardState extends State<DashBoard> {
                     : resturantsdata[2].userLiked = true;
               });
             }),
-            resitem(resturantsdata[3], onTapped: () {
+            resitem(resturantsdata[3], context: context, onTapped: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -548,7 +549,7 @@ class _DashBoardState extends State<DashBoard> {
                     : resturantsdata[3].userLiked = true;
               });
             }),
-            resitem(resturantsdata[4], onTapped: () {
+            resitem(resturantsdata[4], context: context, onTapped: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
