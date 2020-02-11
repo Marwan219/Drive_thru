@@ -7,9 +7,21 @@ import 'package:page_transition/page_transition.dart';
 class ResturantManagement{
 
 
-  addNewResturant(context, restMap) async{
+  addNewResturant(context, {firstName, lastName, restname, latitude, longitude, gmNum, gmName, branNum, gmMail, hqLocation, hotLine, restNum, restNum2, newsletter}) async{
     final docRef = await Firestore.instance.collection('/Restaurants').add({
-      'Resturant Info': restMap
+      'Resturant Name': restname,
+      'Resturant Number' : restNum,
+      'Resturant latitude' : latitude,
+      'Resturant longitude' : longitude,
+      'GM Number' : gmNum,
+      'GM Name' : gmName,
+      'Number Of Branches' : branNum,
+      'GM E-Mail' : gmMail,
+      'HQ Location' : hqLocation, 
+      'HotLine' : hotLine,  
+      'Resturant Number 2' : restNum2,
+      'News Letter' : newsletter,
+
     });
     docRef.documentID;
     

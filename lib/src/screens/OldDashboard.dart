@@ -135,9 +135,7 @@ Widget storeTab(BuildContext context) {
           context,
           MaterialPageRoute(
             builder: (context) {
-              return new ProductPage(
-                productData: foods[0],
-              );
+              return ;
             },
           ),
         );
@@ -147,9 +145,7 @@ Widget storeTab(BuildContext context) {
           context,
           MaterialPageRoute(
             builder: (context) {
-              return new ProductPage(
-                productData: foods[1],
-              );
+              return ;
             },
           ),
         );
@@ -161,9 +157,7 @@ Widget storeTab(BuildContext context) {
           context,
           MaterialPageRoute(
             builder: (context) {
-              return new ProductPage(
-                productData: foods[2],
-              );
+              return ;
             },
           ),
         );
@@ -175,9 +169,7 @@ Widget storeTab(BuildContext context) {
           context,
           MaterialPageRoute(
             builder: (context) {
-              return new ProductPage(
-                productData: foods[3],
-              );
+              return ;
             },
           ),
         );
@@ -191,9 +183,7 @@ Widget storeTab(BuildContext context) {
           context,
           MaterialPageRoute(
             builder: (context) {
-              return new ProductPage(
-                productData: drinks[0],
-              );
+              return ;
             },
           ),
         );
@@ -203,9 +193,7 @@ Widget storeTab(BuildContext context) {
           context,
           MaterialPageRoute(
             builder: (context) {
-              return new ProductPage(
-                productData: drinks[1],
-              );
+              return ;
             },
           ),
         );
@@ -215,9 +203,7 @@ Widget storeTab(BuildContext context) {
           context,
           MaterialPageRoute(
             builder: (context) {
-              return new ProductPage(
-                productData: drinks[2],
-              );
+              return ;
             },
           ),
         );
@@ -227,9 +213,7 @@ Widget storeTab(BuildContext context) {
           context,
           MaterialPageRoute(
             builder: (context) {
-              return new ProductPage(
-                productData: drinks[3],
-              );
+              return ;
             },
           ),
         );

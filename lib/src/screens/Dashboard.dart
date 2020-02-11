@@ -184,7 +184,7 @@ class _DashBoardState extends State<DashBoard> {
             ListTile(
               title: Text('Store'),
               onTap: () {
-                Navigator.pop(context);
+                Navigator.push(context, PageTransition(type: PageTransitionType.leftToRightWithFade, child: Menu()));
               },
             ),
             ListTile(
@@ -420,7 +420,7 @@ class _DashBoardState extends State<DashBoard> {
   }
 
   Widget resturants(BuildContext context) {
-    return 
+    //return 
   //   Scaffold(  
   //    appBar: AppBar(  
   //      title: Text('Resturants'),
@@ -470,105 +470,105 @@ class _DashBoardState extends State<DashBoard> {
   //    ]),  
   //  );  
     
-    Container(
-        height: 400,
-        padding: const EdgeInsets.all(5),
-        child: ListView(children: <Widget>[
-          Container(
-              child: Column(children: <Widget>[
-            resitem(resturantsdata[0], onTapped: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) {
-                    return new Menu(
-                      productData: resturantsdata[0],
-                    );
-                  },
-                ),
-              );
-            }, onLike: () {
-              setState(() {
-                (resturantsdata[0].userLiked)
-                    ? resturantsdata[0].userLiked = false
-                    : resturantsdata[0].userLiked = true;
-              });
-            }),
-            resitem(resturantsdata[1], onTapped: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) {
-                    return new Menu(
-                      productData: resturantsdata[1],
-                    );
-                  },
-                ),
-              );
-            }, onLike: () {
-              setState(() {
-                (resturantsdata[1].userLiked)
-                    ? resturantsdata[1].userLiked = false
-                    : resturantsdata[1].userLiked = true;
-              });
-            }),
-            resitem(resturantsdata[2], onTapped: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) {
-                    return new Menu(
-                      productData: resturantsdata[2],
-                    );
-                  },
-                ),
-              );
-            }, onLike: () {
-              setState(() {
-                (resturantsdata[2].userLiked)
-                    ? resturantsdata[2].userLiked = false
-                    : resturantsdata[2].userLiked = true;
-              });
-            }),
-            resitem(resturantsdata[3], onTapped: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) {
-                    return new Menu(
-                      productData: resturantsdata[3],
-                    );
-                  },
-                ),
-              );
-            }, onLike: () {
-              setState(() {
-                (resturantsdata[3].userLiked)
-                    ? resturantsdata[3].userLiked = false
-                    : resturantsdata[3].userLiked = true;
-              });
-            }),
-            resitem(resturantsdata[4], onTapped: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) {
-                    return new Menu(
-                      productData: resturantsdata[4],
-                    );
-                  },
-                ),
-              );
-            }, onLike: () {
-              setState(() {
-                (resturantsdata[4].userLiked)
-                    ? resturantsdata[4].userLiked = false
-                    : resturantsdata[4].userLiked = true;
-              });
-            })
-          ]))
-        ]));
-  }
+  //   Container(
+  //       height: 400,
+  //       padding: const EdgeInsets.all(5),
+  //       child: ListView(children: <Widget>[
+  //         Container(
+  //             child: Column(children: <Widget>[
+  //           resitem(resturantsdata[0], onTapped: () {
+  //             Navigator.push(
+  //               context,
+  //               MaterialPageRoute(
+  //                 builder: (context) {
+  //                   return new Menu(
+  //                     productData: resturantsdata[0],
+  //                   );
+  //                 },
+  //               ),
+  //             );
+  //           }, onLike: () {
+  //             setState(() {
+  //               (resturantsdata[0].userLiked)
+  //                   ? resturantsdata[0].userLiked = false
+  //                   : resturantsdata[0].userLiked = true;
+  //             });
+  //           }),
+  //           resitem(resturantsdata[1], onTapped: () {
+  //             Navigator.push(
+  //               context,
+  //               MaterialPageRoute(
+  //                 builder: (context) {
+  //                   return new Menu(
+  //                     productData: resturantsdata[1],
+  //                   );
+  //                 },
+  //               ),
+  //             );
+  //           }, onLike: () {
+  //             setState(() {
+  //               (resturantsdata[1].userLiked)
+  //                   ? resturantsdata[1].userLiked = false
+  //                   : resturantsdata[1].userLiked = true;
+  //             });
+  //           }),
+  //           resitem(resturantsdata[2], onTapped: () {
+  //             Navigator.push(
+  //               context,
+  //               MaterialPageRoute(
+  //                 builder: (context) {
+  //                   return new Menu(
+  //                     productData: resturantsdata[2],
+  //                   );
+  //                 },
+  //               ),
+  //             );
+  //           }, onLike: () {
+  //             setState(() {
+  //               (resturantsdata[2].userLiked)
+  //                   ? resturantsdata[2].userLiked = false
+  //                   : resturantsdata[2].userLiked = true;
+  //             });
+  //           }),
+  //           resitem(resturantsdata[3], onTapped: () {
+  //             Navigator.push(
+  //               context,
+  //               MaterialPageRoute(
+  //                 builder: (context) {
+  //                   return new Menu(
+  //                     productData: resturantsdata[3],
+  //                   );
+  //                 },
+  //               ),
+  //             );
+  //           }, onLike: () {
+  //             setState(() {
+  //               (resturantsdata[3].userLiked)
+  //                   ? resturantsdata[3].userLiked = false
+  //                   : resturantsdata[3].userLiked = true;
+  //             });
+  //           }),
+  //           resitem(resturantsdata[4], onTapped: () {
+  //             Navigator.push(
+  //               context,
+  //               MaterialPageRoute(
+  //                 builder: (context) {
+  //                   return new Menu(
+  //                     productData: resturantsdata[4],
+  //                   );
+  //                 },
+  //               ),
+  //             );
+  //           }, onLike: () {
+  //             setState(() {
+  //               (resturantsdata[4].userLiked)
+  //                   ? resturantsdata[4].userLiked = false
+  //                   : resturantsdata[4].userLiked = true;
+  //             });
+  //           })
+  //         ]))
+  //       ]));
+  // }
 
 
 
@@ -652,6 +652,4 @@ class _DashBoardState extends State<DashBoard> {
 //   }
 
 
-}
-
-
+}}

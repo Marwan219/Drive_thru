@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:drive_thru/src/screens/Carts.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import '../shared/Product.dart';
@@ -16,10 +17,10 @@ import 'Dashboard.dart';
 
 class ProductPage extends StatefulWidget {
   final String pageTitle;
-  final Product productData;
-  //final int time1;
+  final double productprice;
+  final int timeToDone;
 
-  ProductPage({Key key, this.pageTitle, this.productData}) : super(key: key);
+  ProductPage({Key key, this.pageTitle, this.productprice, this.timeToDone}) : super(key: key);
 
   @override
   _ProductPageState createState() => _ProductPageState();
@@ -39,7 +40,7 @@ class _ProductPageState extends State<ProductPage> {
           leading: BackButton(
             color: darkText,
           ),
-          title: Text(widget.productData.name, style: h4),
+          title: Text(widget.pageTitle, style: h4),
         ),
          drawer: new Drawer(  
         child: ListView(
@@ -119,24 +120,25 @@ class _ProductPageState extends State<ProductPage> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
-                          Text(widget.productData.name, style: h5),
-                          Text(widget.productData.price, style: h3),
-                          Container(
-                            margin: EdgeInsets.only(top: 5, bottom: 20),
-                            child: SmoothStarRating(
-                              allowHalfRating: false,
-                              onRatingChanged: (v) {
-                                setState(() {
-                                  _rating = v;
-                                });
-                              },
-                              starCount: 5,
-                              rating: _rating,
-                              size: 27.0,
-                              color: Colors.orange,
-                              borderColor: Colors.orange,
-                            ),
-                          ),
+                          Text(widget.pageTitle, style: h3),
+                          Text(widget.productprice.toString()+'EGP', style: h4),
+                          Text('Ready in '+widget.timeToDone.toString()+' Minutes', style: h5),
+                          // Container(
+                          //   margin: EdgeInsets.only(top: 5, bottom: 20),
+                          //   child: SmoothStarRating(
+                          //     allowHalfRating: false,
+                          //     onRatingChanged: (v) {
+                          //       setState(() {
+                          //         _rating = v;
+                          //       });
+                          //     },
+                          //     starCount: 5,
+                          //     rating: _rating,
+                          //     size: 27.0,
+                          //     color: Colors.orange,
+                          //     borderColor: Colors.orange,
+                          //   ),
+                          // ),
                           Container(
                             margin: EdgeInsets.only(top: 10, bottom: 25),
                             child: Column(
@@ -187,20 +189,14 @@ class _ProductPageState extends State<ProductPage> {
                           Container(
                             width: 180,
                             child: froyoOutlineBtn('Buy Now', () {
-                              Firestore.instance.collection('/Orders').add({
-                                'Item Name' : widget.productData.name,
-                                'Item Price' : widget.productData.price,
-                                //'Duration' :Duration,
-                                'Units' : _quantity 
-                              }).then((value){
-                                //Navigator.of(context).pop();
-                                Navigator.pushReplacement(context, PageTransition(type: PageTransitionType.leftToRight, child: Buy(pageTitle: widget.pageTitle,productData: widget.productData,product_quantity:_quantity,)));
-                              }).catchError((e){print(e);});
+                              Navigator.pushReplacement(context, PageTransition(type: PageTransitionType.leftToRight, child: Buy(pageTitle: widget.pageTitle, product_quantity: _quantity, productPrice: widget.productprice, timeToDone: widget.timeToDone,)));
                             }),
                           ),
                           Container(
                             width: 180,
-                            child: froyoFlatBtn('Add to Cart', () {}),
+                            child: froyoFlatBtn('Add to Cart', () {
+                              Navigator.pushReplacement(context, PageTransition(type: PageTransitionType.leftToRight, child: Carts()));
+                            }),
                           )
                         ],
                       ),
@@ -220,11 +216,12 @@ class _ProductPageState extends State<ProductPage> {
                       child: SizedBox(
                         width: 200,
                         height: 160,
-                        child: foodItem(widget.productData,
-                            isProductPage: true,
-                            onTapped: () {},
-                            imgWidth: 250,
-                            onLike: () {}),
+                        child: Text('test'),
+                        // foodItem(widget.productData,
+                        //     isProductPage: true,
+                        //     onTapped: () {},
+                        //     imgWidth: 250,
+                        //     onLike: () {}),
                       ),
                     )
                   ],

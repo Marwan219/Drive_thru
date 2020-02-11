@@ -7,6 +7,7 @@ import '../shared/buttons.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
 import './menu.dart';
 import './ProductPage.dart';
+import 'AddMenue.dart';
 
 List<Product> foods = [
   Product(
@@ -63,6 +64,11 @@ class _UPPState extends State<UPP> {
             color: darkText,
           ),
           title: Text(widget.productData.name, style: h4),
+          actions: <Widget>[
+            RaisedButton(child: Icon(Icons.control_point),onPressed:(){
+              Navigator.push(context, MaterialPageRoute(builder: (context){return new AddMenue(); }));
+            } ,)
+          ],
         ),
         body: ListView(
             // addAutomaticKeepAlives: false,
@@ -180,9 +186,7 @@ class _UPPState extends State<UPP> {
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) {
-                                          return new ProductPage(
-                                            productData: foods[0],
-                                          );
+                                          return ;
                                         },
                                       ),
                                     );
@@ -196,9 +200,7 @@ class _UPPState extends State<UPP> {
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) {
-                                          return new ProductPage(
-                                            productData: foods[1],
-                                          );
+                                          return ;
                                         },
                                       ),
                                     );
@@ -212,9 +214,7 @@ class _UPPState extends State<UPP> {
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) {
-                                          return new ProductPage(
-                                            productData: foods[2],
-                                          );
+                                          return ;
                                         },
                                       ),
                                     );
@@ -228,9 +228,7 @@ class _UPPState extends State<UPP> {
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) {
-                                          return new ProductPage(
-                                            productData: foods[2],
-                                          );
+                                          return ;
                                         },
                                       ),
                                     );

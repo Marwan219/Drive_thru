@@ -1,8 +1,8 @@
-import 'package:drive_thru/src/screens/OldDashboard.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 import 'package:flutter/widgets.dart';
 import 'dart:core';
+import 'HomePage.dart';
 import 'package:drive_thru/src/screens/AddResturant.dart';
 import 'package:drive_thru/src/screens/HomePage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -10,8 +10,6 @@ import 'package:page_transition/page_transition.dart';
 import '../shared/styles.dart';
 import '../shared/colors.dart';
 import 'Dashboard.dart';
-
-
 
 void main() => runApp(MaterialApp(
       home: TimerPage(),
@@ -26,25 +24,21 @@ void main() => runApp(MaterialApp(
     ));
 
 class TimerPage extends StatefulWidget {
+  final int timeInMen;
   @override
-  TimerPage({Key key,int time}) : super(key: key);
+  TimerPage({Key key, this.timeInMen}) : super(key: key);
   TimerPageState createState() => TimerPageState();
 }
 
 class TimerPageState extends State<TimerPage> with TickerProviderStateMixin {
   AnimationController controller;
 
-  //bool isPlaying = false;
-
   String get timerString {
     Duration duration = controller.duration * controller.value;
-    return '${duration.inHours}:${duration.inMinutes % 60}:${(duration.inSeconds % 60).toString().padLeft(2, '0')}';
-  
+    return '${duration.inMinutes % 60}:${(duration.inSeconds % 60).toString().padLeft(2, '0')}';
   }
 
   set _controller(TickerFuture _controller) {}
-
-
   @override
   void initState() {
 
@@ -52,16 +46,20 @@ class TimerPageState extends State<TimerPage> with TickerProviderStateMixin {
        controller = AnimationController(
       
       vsync: this,
-      duration: Duration(seconds: 10),
+      duration: Duration(seconds: widget.timeInMen),
       
     );
 
+     _controller = controller.reverse(
+    from: controller.value == 0.0
+        ? 1.0
+        : controller.value);
     
-    _controller=controller.forward();
   }
   @override
   Widget build(BuildContext context) {
     ThemeData themeData = Theme.of(context);
+    
     return Scaffold(
        backgroundColor: bgColor,
         appBar: AppBar(
@@ -114,16 +112,18 @@ class TimerPageState extends State<TimerPage> with TickerProviderStateMixin {
               onTap: () {
                 Navigator.pushReplacement(context, PageTransition(type: PageTransitionType.leftToRightWithFade, child: AddResturant()));
               },
-            ),ListTile(
-              title: Text('Settings'),
-              onTap: () {
-              },
-            ),ListTile(
+            ),
+            ListTile(
               title: Text('Timer Page'),
               onTap: () {
                  Navigator.pushReplacement(context, PageTransition(type: PageTransitionType.leftToRightWithFade, child: TimerPage()));
               },
+            ),ListTile(
+              title: Text('Settings'),
+              onTap: () {
+              },
             ),
+
               ListTile(
               title: Text('Sign Out'),
               onTap: () {
@@ -167,7 +167,7 @@ class TimerPageState extends State<TimerPage> with TickerProviderStateMixin {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
                             Text(
-                              "Your Order is Ready in 10 Seconds: ",
+                              "Your Order is Ready in: ",
                               style: themeData.textTheme.subhead,
                             ),
                             AnimatedBuilder(
@@ -224,7 +224,7 @@ class TimerPainter extends CustomPainter {
     canvas.drawCircle(size.center(Offset.zero), size.width / 2.0, paint);
     paint.color = color;
     double progress = (1.0 - animation.value) * 2 * math.pi;
-    canvas.drawArc(Offset.zero & size, math.pi * 1.5, -progress, false, paint);
+    canvas.drawArc(Offset.zero & size, math.pi * 1.5, progress, false, paint);
   }
 
   @override

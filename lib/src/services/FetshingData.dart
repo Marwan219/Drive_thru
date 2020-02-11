@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:drive_thru/src/screens/Dashboard.dart';
+import 'package:drive_thru/src/screens/menu.dart';
 import 'package:drive_thru/src/shared/colors.dart';
+import 'package:drive_thru/src/shared/partials.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 
@@ -59,14 +61,16 @@ class _FetshingDataState extends State<FetshingData> {
    QuerySnapshot querySnapshot;  
    if (_lastDocument == null) {  
      querySnapshot = await _firestore
-        .collection('Orders')
-        .orderBy("Item Name")
+        .collection('Restaurants')
+        .orderBy("Resturant Name")
         .limit(_viewCount).
         getDocuments(); 
+        print(querySnapshot.documents[0].data['Resturant Name']);
+        print(querySnapshot.documents[0].data['imageURL']);
    } else {  
      querySnapshot = await _firestore
-        .collection('Orders')
-        .orderBy("Item Name")
+        .collection('Restaurants')
+        .orderBy("Resturant Name")
          .startAfterDocument(_lastDocument)  
         .limit(_viewCount)
         .getDocuments();  
@@ -133,7 +137,7 @@ class _FetshingDataState extends State<FetshingData> {
    return Scaffold(  
      appBar: AppBar(  
        title: Text('Resturants'),
-       leading: BackButton(color: darkText,onPressed:(){ Navigator.pushReplacement(context, PageTransition(type: PageTransitionType.leftToRight, child:DashBoard()));},)  
+       //leading: BackButton(color: darkText,onPressed:(){ Navigator.pushReplacement(context, PageTransition(type: PageTransitionType.leftToRight, child:DashBoard()));},)  
      ),  
      body: Column(children: [  
        Expanded(  
@@ -145,11 +149,23 @@ class _FetshingDataState extends State<FetshingData> {
                  controller: _scrollController,  
                  itemCount: _resturants.length,  
                  itemBuilder: (context, index) {  
-                   return ListTile(  
-                     contentPadding: EdgeInsets.all(5),  
-                     title: Text(_resturants[index].data['Item Name']),  
-                     subtitle: Text(index.toString()),  
-                   );  
+                   return resitem2(
+                     _resturants[index].data['Resturant Name'],
+                     onTapped: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return new Menu(
+                              pageTitle: _resturants[index].data['Resturant Name'] ,
+                              resturantID: _resturants[index].documentID,
+                              imgURL: _resturants[index].data['imageURL'],
+                            );
+                          },
+                        ),
+                      );
+                    },imgURL: _resturants[index].data['imageURL']
+                   );
                  },  
                ),  
        ),  

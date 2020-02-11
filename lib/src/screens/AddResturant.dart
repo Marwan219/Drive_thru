@@ -233,7 +233,22 @@ class _AddResturantState extends State <AddResturant> {
                                     restmap['newsletter'] = _user.newsletter;
                                     print(_user);
                                     //Image_picker();
-                                    ResturantManagement().addNewResturant(context, restmap);
+                                    ResturantManagement().addNewResturant(context,
+                                      firstName: _user.firstName,
+                                      lastName: _user.lastName,
+                                      restname: _user.restname,
+                                      latitude: _user.latitude,
+                                      longitude: _user.longitude,
+                                      gmNum: _user.gmNum,
+                                      gmName: _user.gmName,
+                                      branNum: _user.branNum,
+                                      gmMail: _user.gmMail,
+                                      hqLocation: _user.hqLocation,
+                                      hotLine: _user.hotLine,
+                                      restNum: _user.restNum,
+                                      restNum2: _user.restNum2,
+                                      newsletter: _user.newsletter
+                                    );
                                     //Navigator.push(context, PageTransition(type: PageTransitionType.leftToRight, child: Image_picker()));
                                   })
                           ),
