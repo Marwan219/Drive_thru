@@ -14,6 +14,10 @@ import './Menu.dart';
 import '../shared/Product.dart';
 import '../shared/partials.dart';
 import './OldDashboard.dart';
+import '../../generated/intl/l10n.dart';
+import '../../generated/intl/helper.dart';
+import '../services/flutter_restart.dart';
+
 
 List<Product> resturantsdata = [
   Product(
@@ -114,7 +118,60 @@ class _DashBoardState extends State<DashBoard> {
   }
 
 
+ Future<void> LanguageChange() async {
+  return showDialog<void>(
+    context: context,
+    barrierDismissible: false, // user must tap button!
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title:Center(child:Text(AppLocalizations.of(context).language),) ,
+        // elevation: 40.0,
+      
+        actions: <Widget>[
+          Column(
+            children: <Widget>[
+             Container(
+               width:MediaQuery.of(context).size.width   ,
+               child:OutlineButton(
+              shape: new Border.all(width: 2,color: Colors.black),
+              child: new Text("English"), onPressed: (){
+                  this.setState((){
+                   helper.onLocaleChanged(new Locale("en"));
+                    language = "en";
+                   RestartWidget.of(context).restartApp();
+                  });}),),
+                 
+                     Divider(
+                              color: Colors.black,
+                            ),
+               Container(
+                 width:MediaQuery.of(context).size.width,
+                 child: OutlineButton(
+                shape: new Border.all(width: 2,color: Colors.black),
+              child: new Text("عربى"), onPressed: (){
+                  this.setState((){
+                   helper.onLocaleChanged(new Locale("ar"));
+                    language = "ar";
+                   RestartWidget.of(context).restartApp();
+                  });}),),
+              
+                  Divider(),
+              
+            RaisedButton(
+                child: Text(
+                  "Cancel",
+                  style: TextStyle(color: Colors.white),
+                ),
+                onPressed: () => Navigator.pop(context),
+              ),
+            ],
+          )
 
+        ],
+      );
+    },
+  );
+}
   @override
   Widget build(BuildContext context) {
     final _tabs = [
@@ -163,38 +220,38 @@ class _DashBoardState extends State<DashBoard> {
               ),
             ),
             ListTile(
-              title: Text('Home Page'),
+              title: Text(''),
               onTap: () {
                 Navigator.pop(context);
               },
             ),
             ListTile(
-              title: Text('My Profile'),
+              title: Text(AppLocalizations.of(context).homePage),
               onTap: () {
                 Navigator.pop(context);
               },
             ),
             ListTile(
-              title: Text('My Cart'),
+              title: Text(AppLocalizations.of(context).myProfile),
               
               onTap: () {
                 Navigator.pop(context);
               },
             ),
             ListTile(
-              title: Text('Store'),
+              title: Text(AppLocalizations.of(context).store),
               onTap: () {
                 Navigator.pop(context);
               },
             ),
             ListTile(
-              title: Text('Add restaurant'),
+              title: Text(AppLocalizations.of(context).addResturant),
               onTap: () {
                 Navigator.push(context, PageTransition(type: PageTransitionType.leftToRightWithFade, child: AddResturant()));
               },
             ),
             ListTile(
-              title: Text('Settings'),
+              title: Text(AppLocalizations.of(context).setting),
               
               onTap: () {
                 Navigator.push(context, PageTransition(type: PageTransitionType.leftToRightWithFade, child: FetshingData()));
@@ -202,7 +259,7 @@ class _DashBoardState extends State<DashBoard> {
               },
             ),
             ListTile(
-              title: Text('Timer Page'),
+              title: Text(AppLocalizations.of(context).timerPage),
               
               onTap: () {
                 Navigator.push(context, PageTransition(type: PageTransitionType.leftToRightWithFade, child: TimerPage()));
@@ -210,13 +267,23 @@ class _DashBoardState extends State<DashBoard> {
               },
             ),
             ListTile(
-              title: Text('Sign Out'),
+              title: Text(AppLocalizations.of(context).language),
+              onTap: () {
+                
+               this.LanguageChange();
+              },
+            ),
+               Divider(
+                              color: Colors.black,
+                            ),
+            ListTile(
+              title: Text(AppLocalizations.of(context).signOut),
               onTap: () {
                 FirebaseAuth.instance.signOut().then((value){
                 Navigator.pushReplacement(context, PageTransition(type: PageTransitionType.leftToRightWithFade, child: HomePage()));
                 }).catchError((e){print(e);});
               },
-            ),
+            )
           ],
         ),
       ),
@@ -242,9 +309,11 @@ class _DashBoardState extends State<DashBoard> {
         ]),
       
         );
-  }
 
   
+ 
+  }
+
   void _onheadertappeed(int index) {
     setState(() {
       _selectedcat = index;
@@ -300,16 +369,11 @@ class _DashBoardState extends State<DashBoard> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Container(
-          margin: EdgeInsets.only(left: 15, top: 10),
-          child: Text(headerTitle, style: h4),
+          margin: EdgeInsets.only(left: 15, top: 10, right: 10),
+          child: Center (child : Text(headerTitle, style: h4)),
+          alignment: Alignment.center,
         ),
-        Container(
-          margin: EdgeInsets.only(left: 15, top: 2),
-          child: FlatButton(
-            onPressed: onViewMore,
-            child: Text('View all ›', style: contrastText),
-          ),
-        )
+        
       ],
     );
   }
@@ -320,7 +384,9 @@ class _DashBoardState extends State<DashBoard> {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
-        sectionHeader('All Categories', onViewMore: () {}),
+        Center (
+        
+          child :sectionHeader(AppLocalizations.of(context).allCategory, onViewMore: () {})),
         SizedBox(
           // width: MediaQuery.of(context).size.width,
           width: MediaQuery.of(context).size.width,
@@ -329,20 +395,20 @@ class _DashBoardState extends State<DashBoard> {
             scrollDirection: Axis.horizontal,
             shrinkWrap: true,
             children: <Widget>[
-              headerCategoryItem('Frieds', Fryo.dinner, onPressed: () {
+              headerCategoryItem(AppLocalizations.of(context).frieds, Fryo.dinner, onPressed: () {
                 setState(() {
                   _onheadertappeed(1);
                 });
               }),
-              headerCategoryItem('Fast Food', Fryo.food, onPressed: () {
+              headerCategoryItem(AppLocalizations.of(context).fastFood, Fryo.food, onPressed: () {
                   setState(() {
                   _onheadertappeed(2);
                 });
               }),
-              headerCategoryItem('Creamery', Fryo.poop, onPressed: () {}),
-              headerCategoryItem('Hot Drinks', Fryo.coffee_cup,
+              headerCategoryItem(AppLocalizations.of(context).creamery, Fryo.poop, onPressed: () {}),
+              headerCategoryItem(AppLocalizations.of(context).hotDrinks, Fryo.coffee_cup,
                   onPressed: () {}),
-              headerCategoryItem('Vegetables', Fryo.leaf, onPressed: () {}),
+              headerCategoryItem(AppLocalizations.of(context).vegetables, Fryo.leaf, onPressed: () {}),
             ],
           ),
         )
@@ -405,8 +471,8 @@ class _DashBoardState extends State<DashBoard> {
                         decoration: BoxDecoration(
                             shape: BoxShape.rectangle, color: Colors.white),
                         child: Center(
-                            child: Text(
-                          "Resturants",
+                            child: Text(AppLocalizations.of(context).resturants
+                          ,
                           style: TextStyle(
                             fontFamily: 'Pacifico',
                             fontSize: 15,

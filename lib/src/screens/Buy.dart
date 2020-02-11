@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
- 
 import 'package:page_transition/page_transition.dart';
 import './Timerpage.dart';
-import 'package:flutter/material.dart';
 import '../shared/Product.dart';
 import '../shared/styles.dart';
 import '../shared/colors.dart';
-import '../shared/partials.dart';
-import '../shared/buttons.dart';
-import 'package:smooth_star_rating/smooth_star_rating.dart';
 import './menu.dart';
-import './ProductPage.dart';
-
-
+import '../../generated/intl/l10n.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import '../../generated/intl/helper.dart';
+import '../services/flutter_restart.dart';
+import 'package:drive_thru/src/screens/AddResturant.dart';
+import 'package:drive_thru/src/screens/HomePage.dart';
+import 'package:drive_thru/src/services/FetshingData.dart';
 
  enum SingingCharacter { car, walk }
  class Buy extends StatefulWidget {
@@ -71,6 +70,61 @@ import './ProductPage.dart';
 class _BuyState extends State<Buy> {
   @override
 
+  Future<void> LanguageChange() async {
+  return showDialog<void>(
+    context: context,
+    barrierDismissible: false, // user must tap button!
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title:Center(child:Text(AppLocalizations.of(context).language),) ,
+        // elevation: 40.0,
+      
+        actions: <Widget>[
+          Column(
+            children: <Widget>[
+             Container(
+               width:MediaQuery.of(context).size.width   ,
+               child:OutlineButton(
+              shape: new Border.all(width: 2,color: Colors.black),
+              child: new Text("English"), onPressed: (){
+                  this.setState((){
+                   helper.onLocaleChanged(new Locale("en"));
+                    language = "en";
+                   RestartWidget.of(context).restartApp();
+                  });}),),
+                 
+                     Divider(
+                              color: Colors.black,
+                            ),
+               Container(
+                 width:MediaQuery.of(context).size.width,
+                 child: OutlineButton(
+                shape: new Border.all(width: 2,color: Colors.black),
+              child: new Text("عربى"), onPressed: (){
+                  this.setState((){
+                   helper.onLocaleChanged(new Locale("ar"));
+                    language = "ar";
+                   RestartWidget.of(context).restartApp();
+                  });}),),
+              
+                  Divider(),
+              
+            RaisedButton(
+                child: Text(
+                  "Cancel",
+                  style: TextStyle(color: Colors.white),
+                ),
+                onPressed: () => Navigator.pop(context),
+              ),
+            ],
+          )
+
+        ],
+      );
+    },
+  );
+}
+
    SingingCharacter _character = SingingCharacter.walk  ;
 
   Widget build(BuildContext context) {
@@ -90,6 +144,87 @@ class _BuyState extends State<Buy> {
               Text('Check Out', style: logoWhiteStyle, textAlign: TextAlign.center),
         
         ),
+
+        drawer: new Drawer(  
+        child: ListView(
+
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              child: Text('Virtual DriveThru', style: logoWhiteStyle, textAlign: TextAlign.center),
+              decoration: BoxDecoration(
+                color: Colors.orange,
+              ),
+            ),
+            ListTile(
+              title: Text(''),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Text(AppLocalizations.of(context).homePage),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Text(AppLocalizations.of(context).myProfile),
+              
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Text(AppLocalizations.of(context).store),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Text(AppLocalizations.of(context).addResturant),
+              onTap: () {
+                Navigator.push(context, PageTransition(type: PageTransitionType.leftToRightWithFade, child: AddResturant()));
+              },
+            ),
+            ListTile(
+              title: Text(AppLocalizations.of(context).setting),
+              
+              onTap: () {
+                Navigator.push(context, PageTransition(type: PageTransitionType.leftToRightWithFade, child: FetshingData()));
+                
+              },
+            ),
+            ListTile(
+              title: Text(AppLocalizations.of(context).timerPage),
+              
+              onTap: () {
+                Navigator.push(context, PageTransition(type: PageTransitionType.leftToRightWithFade, child: TimerPage()));
+                
+              },
+            ),
+            ListTile(
+              title: Text(AppLocalizations.of(context).language),
+              onTap: () {
+                
+               this.LanguageChange();
+              },
+            ),
+               Divider(
+                              color: Colors.black,
+                            ),
+            ListTile(
+              title: Text(AppLocalizations.of(context).signOut),
+              onTap: () {
+                FirebaseAuth.instance.signOut().then((value){
+                Navigator.pushReplacement(context, PageTransition(type: PageTransitionType.leftToRightWithFade, child: HomePage()));
+                }).catchError((e){print(e);});
+              },
+            )
+          ],
+        ),
+      ),
+
 
 
 
@@ -114,15 +249,15 @@ class _BuyState extends State<Buy> {
                      
           decoration: rescardstyle,
           child: Column (children: <Widget>[
-        Text(" Bill " , style: h3,), 
+        Text(AppLocalizations.of(context).bill , style: h3,), 
       
              
         Row(children: <Widget>[
-               Text("Items", style: h4,), 
+               Text(AppLocalizations.of(context).items, style: h4,), 
               Spacer(flex:5,),
-              Text("Quantiy",style: h4,),
+              Text(AppLocalizations.of(context).quantity,style: h4,),
               Spacer(flex:1,),
-              Text("Price",style: h4,)
+              Text(AppLocalizations.of(context).price,style: h4,)
            
         ],),
                               
@@ -164,7 +299,7 @@ class _BuyState extends State<Buy> {
 
               children: <Widget>[
                 
-               Text("Total price", style: h5,), 
+               Text(AppLocalizations.of(context).totalPrice, style: h5,), 
                Spacer(flex:5,),
          
                 Text(((double.parse(widget.productData.price.substring(1))*widget.product_quantity).toString()), 
@@ -489,7 +624,7 @@ class _BuyState extends State<Buy> {
           margin: EdgeInsets.only(top: 5, bottom:2),
             decoration: rescardstyle,
             child:Center(child:
-        Text("Choose Available coins",style: h4,))),         
+        Text(AppLocalizations.of(context).chooseAvailableCoins,style: h4,))),         
 
         Container(
           height: 200,
@@ -640,10 +775,10 @@ class _BuyState extends State<Buy> {
                child:Column(
                           children: <Widget>[
 
-                            Text("Please Choose Delivery option",style: h6,),
+                            Text(AppLocalizations.of(context).deliveryOption,style: h6,),
 
                             RadioListTile<SingingCharacter>(
-                              title: const Text('Car'),
+                              title:  Text(AppLocalizations.of(context).car),
                               value: SingingCharacter.car,
                               groupValue: _character,
                               onChanged: (SingingCharacter value) {
@@ -655,7 +790,7 @@ class _BuyState extends State<Buy> {
                               },
                             ),
                             RadioListTile<SingingCharacter>(
-                              title: const Text('Walk'),
+                              title:  Text(AppLocalizations.of(context).walk),
                               value: SingingCharacter.walk,
                               groupValue: _character,
                               onChanged: (SingingCharacter value) {
@@ -698,11 +833,11 @@ class _BuyState extends State<Buy> {
               
           decoration: rescardstyle,
           child: Column (children: <Widget>[
-        Text(" Enter Your Information " , style: h3,), 
+        Text(AppLocalizations.of(context).personalInfo , style: h3,), 
       
              Divider(),
         Column(children: <Widget>[
-               Text("Phone Number", style:h4,), 
+               Text(AppLocalizations.of(context).phoneNumber, style:h4,), 
                Divider(),
           
                TextField(
@@ -720,7 +855,7 @@ class _BuyState extends State<Buy> {
                         border: inputFieldDefaultBorderStyle),
                   ),
                     Divider(),
-                      Text("Name", style:h4,), 
+                      Text(AppLocalizations.of(context).name, style:h4,), 
                      Divider(),
                     TextField(
                     onChanged: (value){
@@ -764,11 +899,11 @@ class _BuyState extends State<Buy> {
               
           decoration: rescardstyle,
           child: Column (children: <Widget>[
-        Text(" Enter car spec " , style: h3,), 
+        Text(AppLocalizations.of(context).carSpec , style: h3,), 
       
              Divider(),
         Column(children: <Widget>[
-               Text("Number", style:h4,), 
+               Text(AppLocalizations.of(context).carNumber, style:h4,), 
                Divider(),
           
                TextField(
@@ -786,7 +921,7 @@ class _BuyState extends State<Buy> {
                         border: inputFieldDefaultBorderStyle),
                   ),
                     Divider(),
-                      Text("Color", style:h4,), 
+                      Text(AppLocalizations.of(context).carColor, style:h4,), 
                      Divider(),
                     TextField(
                     onChanged: (value){
@@ -803,7 +938,7 @@ class _BuyState extends State<Buy> {
                         border: inputFieldDefaultBorderStyle),
                   ),
                   Divider(),
-                      Text("Model", style:h4,), 
+                      Text(AppLocalizations.of(context).carModel, style:h4,), 
                      Divider(),
                     TextField(
                     onChanged: (value){
@@ -848,7 +983,7 @@ class _BuyState extends State<Buy> {
                   onPressed: () {
                     Navigator.pushReplacement(context, PageTransition(type: PageTransitionType.leftToRight, child: TimerPage()));
                   },
-                  child: Text('Buy', style: contrastTextBold),
+                  child: Text(AppLocalizations.of(context).buyNowbtn, style: contrastTextBold),
                 )) 
 
         ],
@@ -856,6 +991,8 @@ class _BuyState extends State<Buy> {
 
       
       ) ,
+
+      
 
     ); 
   }
