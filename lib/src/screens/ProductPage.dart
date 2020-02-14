@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:drive_thru/src/screens/Carts.dart';
+import 'package:drive_thru/src/services/AuthService.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
+import '../services/CartManagement.dart';
 import '../shared/Product.dart';
 import '../shared/styles.dart';
 import '../shared/colors.dart';
@@ -29,8 +31,19 @@ class ProductPage extends StatefulWidget {
 class _ProductPageState extends State<ProductPage> {
   double _rating = 4;
   int _quantity = 1;
+  String id = '';
+
+  void initState(){
+  FirebaseAuth.instance.currentUser().then((user){
+    setState(() {
+      id = user.uid;
+    });  
+  }) ;
+  }
+  
   @override
   Widget build(BuildContext context) {
+    print(id);
     return Scaffold(
         backgroundColor: bgColor,
         appBar: AppBar(
@@ -195,7 +208,7 @@ class _ProductPageState extends State<ProductPage> {
                           Container(
                             width: 180,
                             child: froyoFlatBtn('Add to Cart', () {
-                              Navigator.pushReplacement(context, PageTransition(type: PageTransitionType.leftToRight, child: Carts()));
+                              CartManagement().addCartItem(context, mealName:  widget.pageTitle, mealPrice: widget.productprice, timeToDone: widget.timeToDone, docID: id);
                             }),
                           )
                         ],
