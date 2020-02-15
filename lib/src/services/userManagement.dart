@@ -9,7 +9,7 @@ import '../screens/ResturantList.dart';
 
 class UserManagement{
   storeNewUser(user, fullName, context){
-    Firestore.instance.collection('/users').add({
+    Firestore.instance.collection('/users').document(user.uid).setData({
       'Full Name' : fullName,
       'Email' : user.email,
       'uid' : user.uid
