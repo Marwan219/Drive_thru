@@ -1,9 +1,5 @@
 import 'dart:io';
-import 'package:drive_thru/src/screens/Image_picker.dart';
 import 'package:drive_thru/src/services/resturantManagement.dart';
-import 'package:firebase_storage/firebase_storage.dart';
-import 'package:page_transition/page_transition.dart';
-import 'package:path/path.dart' as Path;
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import '../shared/styles.dart';
@@ -66,6 +62,7 @@ class _AddResturantState extends State <AddResturant> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomPadding: false,
         appBar: AppBar(title: Text('Add new Restaurant', style: logoWhiteStyle, textAlign: TextAlign.center),),
         body: ListView(
         shrinkWrap: true,

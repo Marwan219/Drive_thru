@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:drive_thru/src/screens/Dashboard.dart';
 import 'package:drive_thru/src/screens/Image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';

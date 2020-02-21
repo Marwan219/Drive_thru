@@ -1,4 +1,4 @@
-package com.caiwave.drivethru
+package com.timpo.drivethru
 
 import android.os.Bundle
 

@@ -2,10 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import './Timerpage.dart';
-import '../shared/Product.dart';
 import '../shared/styles.dart';
 import '../shared/colors.dart';
-import './menu.dart';
 
 enum SingingCharacter { car, walk }
 
@@ -31,6 +29,7 @@ class Buy extends StatefulWidget {
   final double productPrice;
   final int product_quantity;
   final int timeToDone;
+  final String resturantID;
   List coins = [
     {"value": 1, "checked": false},
     {"value": 5, "checked": false},
@@ -40,7 +39,7 @@ class Buy extends StatefulWidget {
     {"value": 100, "checked": false},
     {"value": 200, "checked": false}
   ];
-  Buy({Key key, this.pageTitle, this.productPrice, this.product_quantity, this.timeToDone})
+  Buy({Key key, this.pageTitle, this.productPrice, this.product_quantity, this.timeToDone, this.resturantID})
       : super(key: key);
   @override
   _BuyState createState() => _BuyState();
@@ -52,16 +51,13 @@ class _BuyState extends State<Buy> {
 
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomPadding: false,
       appBar: AppBar(
         centerTitle: true,
         elevation: 0,
         leading: IconButton(
             onPressed: () {
-              Navigator.pushReplacement(
-                  context,
-                  PageTransition(
-                      type: PageTransitionType.leftToRightWithFade,
-                      child: Menu()));
+              Navigator.of(context).pop();
             },
             iconSize: 21,
             icon: Icon(
@@ -545,7 +541,7 @@ class _BuyState extends State<Buy> {
               child: FlatButton(
                 onPressed: () {
                   
-                  Firestore.instance.collection('/Orders').add({
+                  Firestore.instance.collection('/Restaurants').document(widget.resturantID).collection('Orders').add({
                     'Meal Name' : widget.pageTitle,
                     'Meal Price' : widget.productPrice,
                     'Units' : widget.product_quantity,

@@ -1,21 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:drive_thru/src/screens/AddResturant.dart';
-import 'package:drive_thru/src/screens/HomePage.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'Dashboard.dart';
-import 'package:drive_thru/src/screens/HomePage.dart';
-import 'package:drive_thru/src/screens/Timerpage.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
-import 'package:page_transition/page_transition.dart';
 
-import '../shared/styles.dart';
+import 'package:flutter/material.dart';
+
 import '../shared/colors.dart';
-import '../shared/fryo_icons.dart';
-import './Menu.dart';
-import '../shared/Product.dart';
-import '../shared/partials.dart';
-import './OldDashboard.dart';
 
 //void main() => runApp(MaterialApp(
 

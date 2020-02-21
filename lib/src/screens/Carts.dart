@@ -1,14 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../shared/styles.dart';
 import '../shared/colors.dart';
-import '../services/AuthService.dart';
 import 'ProductPage.dart';
 
 class Carts extends StatefulWidget{
   final String uid;
-  Carts({Key key, this.uid}) : super(key: key);
+  final String resturantID;
+  Carts({Key key, this.uid, this.resturantID}) : super(key: key);
   @override
   _CartsState createState() => _CartsState();
 }
@@ -59,7 +58,7 @@ class _CartsState extends State<Carts>{
         .collection('/users').document(widget.uid).collection('Cart')
         .orderBy("Meal Name")
         .getDocuments(); 
-    print(querySnapshot.documents[0].data);
+    print(querySnapshot.documents[0].data['Item Image URL']);
    
    if (querySnapshot.documents.length < _viewCount) {  
      hasMore = false;  
@@ -84,6 +83,7 @@ class _CartsState extends State<Carts>{
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
+      resizeToAvoidBottomPadding: false,
       backgroundColor: bgColor,
         appBar: new AppBar(
           centerTitle: true,
@@ -115,9 +115,11 @@ class _CartsState extends State<Carts>{
                             MaterialPageRoute(
                               builder: (context) {
                                 return ProductPage(
+                                  itemImageURL: _cartItems[index].data['Item Image URL'],
                                   pageTitle: _cartItems[index].data['Meal Name'],
                                   productprice: _cartItems[index].data['Meal Price'],
                                   timeToDone: _cartItems[index].data['Time To Done'],
+                                  restID: widget.resturantID,
                                 );
                               },
                             ),

@@ -8,35 +8,6 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:842954118148:android:c5c443963ce99a781d1151",
-        "android_client_info": {
-          "package_name": "com.SE.planting_app"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "842954118148-lqvhoae74cfsup04vad3h1djiapgadj0.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyDCVeWirXHqa0cGj1D8xDc30Xpy1n2HGpY"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "842954118148-lqvhoae74cfsup04vad3h1djiapgadj0.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
         "mobilesdk_app_id": "1:842954118148:android:0944d4bb212458b21d1151",
         "android_client_info": {
           "package_name": "com.caiwave.DriveThru"
@@ -59,6 +30,13 @@
             {
               "client_id": "842954118148-lqvhoae74cfsup04vad3h1djiapgadj0.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "842954118148-dc03lcvcj6213chuuslvu0vdhjveauhk.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.driveThru"
+              }
             }
           ]
         }
@@ -88,6 +66,13 @@
             {
               "client_id": "842954118148-lqvhoae74cfsup04vad3h1djiapgadj0.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "842954118148-dc03lcvcj6213chuuslvu0vdhjveauhk.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.driveThru"
+              }
             }
           ]
         }
@@ -117,6 +102,13 @@
             {
               "client_id": "842954118148-lqvhoae74cfsup04vad3h1djiapgadj0.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "842954118148-dc03lcvcj6213chuuslvu0vdhjveauhk.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.driveThru"
+              }
             }
           ]
         }
@@ -124,9 +116,9 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:842954118148:android:62ba1389e4de754e1d1151",
+        "mobilesdk_app_id": "1:842954118148:android:30f7a9c9aeb782c21d1151",
         "android_client_info": {
-          "package_name": "com.example.fryo"
+          "package_name": "com.tempo.drive_thru_rest"
         }
       },
       "oauth_client": [
@@ -146,6 +138,49 @@
             {
               "client_id": "842954118148-lqvhoae74cfsup04vad3h1djiapgadj0.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "842954118148-dc03lcvcj6213chuuslvu0vdhjveauhk.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.driveThru"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:842954118148:android:ee4f8da0956769601d1151",
+        "android_client_info": {
+          "package_name": "com.timpo.drivethru"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "842954118148-lqvhoae74cfsup04vad3h1djiapgadj0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDCVeWirXHqa0cGj1D8xDc30Xpy1n2HGpY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "842954118148-lqvhoae74cfsup04vad3h1djiapgadj0.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "842954118148-dc03lcvcj6213chuuslvu0vdhjveauhk.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.driveThru"
+              }
             }
           ]
         }

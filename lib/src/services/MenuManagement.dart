@@ -1,8 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:drive_thru/src/screens/Dashboard.dart';
-import 'package:drive_thru/src/screens/Image_picker.dart';
-import 'package:drive_thru/src/screens/menu.dart';
-import 'package:drive_thru/src/services/FetshingData.dart';
+import 'package:drive_thru/src/screens/NewDashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 
@@ -23,7 +20,7 @@ class MenuManagement{
       //Navigator.of(context).pop();
       
  
-    Navigator.pushReplacement(context, PageTransition(type: PageTransitionType.leftToRight, child: FetshingData()));
+    Navigator.pushReplacement(context, PageTransition(type: PageTransitionType.leftToRight, child: NewDashboard()));
   
   }
 }

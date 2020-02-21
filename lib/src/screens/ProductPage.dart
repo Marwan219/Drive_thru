@@ -1,28 +1,23 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:drive_thru/src/screens/Carts.dart';
-import 'package:drive_thru/src/services/AuthService.dart';
+import 'package:drive_thru/src/screens/survey.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import '../services/CartManagement.dart';
-import '../shared/Product.dart';
 import '../shared/styles.dart';
 import '../shared/colors.dart';
 import '../shared/partials.dart';
 import '../shared/buttons.dart';
-import 'package:smooth_star_rating/smooth_star_rating.dart';
-import 'package:drive_thru/src/screens/AddResturant.dart';
 import 'package:drive_thru/src/screens/HomePage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'Buy.dart';
-import 'Timerpage.dart';
-import 'Dashboard.dart';
 
 class ProductPage extends StatefulWidget {
   final String pageTitle;
   final double productprice;
   final int timeToDone;
+  final String restID;
+  final itemImageURL;
 
-  ProductPage({Key key, this.pageTitle, this.productprice, this.timeToDone}) : super(key: key);
+  ProductPage({Key key, this.pageTitle, this.productprice, this.timeToDone, this.restID, this.itemImageURL}) : super(key: key);
 
   @override
   _ProductPageState createState() => _ProductPageState();
@@ -40,11 +35,41 @@ class _ProductPageState extends State<ProductPage> {
     });  
   }) ;
   }
+
+  showAlert(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Virtual drive-thru'),
+          content: Text("Are you sure to exit?"),
+          actions: <Widget>[
+            FlatButton(
+              child: Text("Yes"),
+              onPressed: () {
+                Navigator.pushReplacement(
+                    context,
+                    PageTransition(
+                        type: PageTransitionType.leftToRightWithFade,
+                        child: HomePage()));
+              },
+            ),
+            FlatButton(
+              child: Text("No"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
   
   @override
   Widget build(BuildContext context) {
-    print(id);
     return Scaffold(
+      resizeToAvoidBottomPadding: false,
         backgroundColor: bgColor,
         appBar: AppBar(
           elevation: 0,
@@ -55,13 +80,13 @@ class _ProductPageState extends State<ProductPage> {
           ),
           title: Text(widget.pageTitle, style: h4),
         ),
-         drawer: new Drawer(  
+         drawer: new Drawer(
         child: ListView(
-
           padding: EdgeInsets.zero,
           children: <Widget>[
             DrawerHeader(
-              child: Text('Virtual DriveThru', style: logoWhiteStyle, textAlign: TextAlign.center),
+              child: Text('Timpo',
+                  style: logoWhiteStyle, textAlign: TextAlign.center),
               decoration: BoxDecoration(
                 color: Colors.orange,
               ),
@@ -73,44 +98,40 @@ class _ProductPageState extends State<ProductPage> {
               },
             ),
             ListTile(
-              title: Text('My Profile'),
+              title: Text('Map'),
               onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              title: Text('My Cart'),
-              
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              title: Text('Store'),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              title: Text('Add restaurant'),
-              onTap: () {
-                Navigator.pushReplacement(context, PageTransition(type: PageTransitionType.leftToRightWithFade, child: AddResturant()));
-              },
+                showDialog(
+                    context: context,
+                    builder: (_) => new AlertDialog(
+                        title: new Text("Comming soon"),
+                        content: new Text("Timpo Map will be coming soon 🙂"),
+                    )
+                );}
             ),
             ListTile(
               title: Text('Settings'),
-              
               onTap: () {
-                Navigator.pop(context);
-                
+                Navigator.of(context).pop();
+              },
+            ),
+            ListTile(
+              title: Text('Let Us know what you think.. 🙂'),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    PageTransition(
+                        type: PageTransitionType.leftToRightWithFade,
+                        child: Survey()));
               },
             ),
             ListTile(
               title: Text('Sign Out'),
               onTap: () {
-                FirebaseAuth.instance.signOut().then((value){
-                Navigator.pushReplacement(context, PageTransition(type: PageTransitionType.leftToRightWithFade, child: HomePage()));
-                }).catchError((e){print(e);});
+                FirebaseAuth.instance.signOut().then((value) {
+                  showAlert(context);
+                }).catchError((e) {
+                  print(e);
+                });
               },
             ),
           ],
@@ -202,13 +223,13 @@ class _ProductPageState extends State<ProductPage> {
                           Container(
                             width: 180,
                             child: froyoOutlineBtn('Buy Now', () {
-                              Navigator.pushReplacement(context, PageTransition(type: PageTransitionType.leftToRight, child: Buy(pageTitle: widget.pageTitle, product_quantity: _quantity, productPrice: widget.productprice, timeToDone: widget.timeToDone,)));
+                              Navigator.push(context, PageTransition(type: PageTransitionType.leftToRight, child: Buy(pageTitle: widget.pageTitle, product_quantity: _quantity, productPrice: widget.productprice, timeToDone: widget.timeToDone, resturantID: widget.restID)));
                             }),
                           ),
                           Container(
                             width: 180,
                             child: froyoFlatBtn('Add to Cart', () {
-                              CartManagement().addCartItem(context, mealName:  widget.pageTitle, mealPrice: widget.productprice, timeToDone: widget.timeToDone, docID: id);
+                              CartManagement().addCartItem(context, mealName:  widget.pageTitle, mealPrice: widget.productprice, timeToDone: widget.timeToDone, docID: id, photoURL: widget.itemImageURL);
                             }),
                           )
                         ],
@@ -229,12 +250,11 @@ class _ProductPageState extends State<ProductPage> {
                       child: SizedBox(
                         width: 200,
                         height: 160,
-                        child: Text('test'),
-                        // foodItem(widget.productData,
-                        //     isProductPage: true,
-                        //     onTapped: () {},
-                        //     imgWidth: 250,
-                        //     onLike: () {}),
+                        child: foodItem(widget.pageTitle,
+                        imageURL: widget.itemImageURL,
+                        price: widget.productprice,
+                        
+                        ),
                       ),
                     )
                   ],
