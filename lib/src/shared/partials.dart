@@ -99,7 +99,7 @@ Widget resitem2(String food, {onTapped, imgURL, context}
                 transitionOnUserGestures: false,
                 tag: food,
                 child: CircleAvatar(
-                  radius: 75.0,
+                  radius: MediaQuery.of(context).size.height* 0.12,
                   backgroundImage: NetworkImage(imgURL),
                   backgroundColor: Colors.transparent,
                 )),
@@ -122,8 +122,8 @@ Widget resitem2(String food, {onTapped, imgURL, context}
         // ),
         Positioned(
           // for text in the menu card
-          top: 178,
-          left: 20,
+          top: MediaQuery.of(context).size.height*0.31,
+          left: MediaQuery.of(context).size.width*0.07,
           child: (!false)
               ? Column(
                   mainAxisAlignment: MainAxisAlignment.start,
