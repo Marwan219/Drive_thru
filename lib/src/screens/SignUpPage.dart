@@ -1,12 +1,11 @@
 import 'dart:core';
+import 'package:drive_thru/src/screens/survey.dart';
+import 'package:drive_thru/src/shared/Loading.dart';
 import 'package:flutter/material.dart';
 import 'package:drive_thru/src/services/userManagement.dart';
 import '../shared/styles.dart';
 import '../shared/colors.dart';
-import '../shared/inputFields.dart';
 import 'package:page_transition/page_transition.dart';
-import './SignInPage.dart';
-import './ResturantList.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 
@@ -26,10 +25,12 @@ class _SignUpPageState extends State<SignUpPage> {
   String _password;
   String str = '';
   bool passCheck = false;
+  bool _loading = false;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return _loading ? Loading() : Scaffold(
+      resizeToAvoidBottomPadding: false,
       appBar: AppBar(
         elevation: 0,
         backgroundColor: white,
@@ -40,7 +41,7 @@ class _SignUpPageState extends State<SignUpPage> {
           FlatButton(
             onPressed: () {
               // Navigator.of(context).pushReplacementNamed('/signin');
-              Navigator.pushReplacement(context, PageTransition(type: PageTransitionType.rightToLeft, child: SignInPage()));
+              Navigator.pushReplacement(context, PageTransition(type: PageTransitionType.rightToLeft, child: Survey()));
 
             },
             child: Text('Sign In', style: contrastText),
@@ -58,7 +59,7 @@ class _SignUpPageState extends State<SignUpPage> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text('Welcome to The Virtual DriveThru!', style: h3),
+                Text('Welcome to Timpo!', style: h3),
                 Text('Let\'s get started', style: taglineText),
                 Container(
                   margin: EdgeInsets.only(top: 13),
@@ -129,6 +130,9 @@ class _SignUpPageState extends State<SignUpPage> {
               right: -15,
               child: FlatButton(
                 onPressed: () {
+                  setState(() {
+                    _loading = true;
+                  }); 
                   if(passCheck == true){
                     FirebaseAuth.instance.createUserWithEmailAndPassword(
                       email: _email ,

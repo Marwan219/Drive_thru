@@ -1,11 +1,6 @@
-import 'dart:io';
-import 'package:drive_thru/src/screens/Dashboard.dart';
-import 'package:drive_thru/src/screens/Image_picker.dart';
-import 'package:drive_thru/src/services/resturantManagement.dart';
+
+import 'package:drive_thru/src/services/MenuManagement.dart';
 import 'package:drive_thru/src/shared/colors.dart';
-import 'package:firebase_storage/firebase_storage.dart';
-import 'package:page_transition/page_transition.dart';
-import 'package:path/path.dart' as Path;
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import '../shared/styles.dart';
@@ -18,24 +13,16 @@ class Menue {
   static const String PassionHiking = 'hiking';
   static const String PassionTraveling = 'traveling';
   String mealName = '';
-  String mealPrice = '';
-  String timeToDone = '';
-  // String latitude = '';
-  // String longitude = '';
-  // String gmNum = '';
-  // String gmName = '';
-  // String branNum = '';
-  // String gmMail= '';
-  // String hqLocation= '';
-  // String hotLine= '';
-  // String restNum= '';
-  // String restNum2= '';
+  double mealPrice = 0.0 ;
+  int timeToDone  = 0;
   bool newsletter = false;
   
 }
 
 
 class AddMenue extends StatefulWidget {
+  final String docID;
+  AddMenue({this.docID});
   @override
   _AddMenueState createState() => _AddMenueState();
 }
@@ -46,23 +33,16 @@ final _formKey = GlobalKey<FormState>();
 
 class _AddMenueState extends State <AddMenue> {
   final _menue = Menue();
+  
+
   // File _image = new File('/images/6.png'); 
 
   
   Map<String, dynamic> menueMap = {
     'mealName' : '',
-    'mealPrice' : '',
-    'timeToDone' : '',
-    // 'latitude' : '',
-    // 'longitude' : '',
-    // 'gmNum' : '',
-    // 'gmName' : '',
-    // 'branNum' : '',
-    // 'gmMail': '',
-    // 'hqLocation': '',
-    // 'hotLine': '',
-    // 'restNum': '',
-    // 'restNum2': '',
+    'mealPrice' : 0.0,
+    'timeToDone' : 0,
+    //'FoodType' : '',
     'newsletter' : false,
   };
   var _foodTypes = ['Soft Drinks', 'Hot Drinks' ,'Main Plates', 'Other'];
@@ -71,10 +51,11 @@ class _AddMenueState extends State <AddMenue> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomPadding: false,
         appBar: AppBar( leading: BackButton(
             color: darkText,
             onPressed: (){
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context){return new DashBoard(); }));
+              //Navigator.pushReplacement(context, MaterialPageRoute(builder: (context){return new DashBoard(); }));
             },
           ),
           title: Text('Add Menue', style: logoWhiteStyle, textAlign: TextAlign.center),),
@@ -111,7 +92,7 @@ class _AddMenueState extends State <AddMenue> {
                                 }
                               },
                               onSaved: (val) =>
-                                  setState(() => _menue.mealPrice = val)),
+                                  setState(() => _menue.mealPrice = double.parse(val))),
                                   TextFormField(
                               decoration:
                                   InputDecoration(labelText: 'Time To Done?'),
@@ -121,7 +102,7 @@ class _AddMenueState extends State <AddMenue> {
                                 }
                               },
                               onSaved: (val) =>
-                                  setState(() => _menue.timeToDone = val)),
+                                  setState(() => _menue.timeToDone = int.parse(val))),
                                   Container(
                     child:DropdownButton<String>(
                       items: _foodTypes.map((String dropDownStringItem){
@@ -138,93 +119,6 @@ class _AddMenueState extends State <AddMenue> {
                       value: _selectedType,
                     ),
                   ),
-                              //     TextFormField(
-                              // decoration:
-                              //     InputDecoration(labelText: 'Kindly enter the latitude'),
-                              // validator: (value) {
-                              //   if (value.isEmpty) {
-                              //     return 'Please enter the latitude';
-                              //   }
-                              // },
-                              // onSaved: (val) =>
-                              //     setState(() => _user.latitude = val)),
-                              //     TextFormField(
-                              // decoration:
-                              //     InputDecoration(labelText: 'Kindly enter the longitude'),
-                              // validator: (value) {
-                              //   if (value.isEmpty) {
-                              //     return 'Please enter the longitude';
-                              //   }
-                              // },
-                              // onSaved: (val) =>
-                              //     setState(() => _user.longitude = val)),
-                              //     TextFormField(
-                              // decoration:
-                              //     InputDecoration(labelText: "Restaurant's Hotline (optional)"),
-                        
-                              // onSaved: (val) =>
-                              //     setState(() => _user.hotLine = val)),
-                              //     TextFormField(
-                              // decoration:
-                              //     InputDecoration(labelText: "Restaurant's Phone number"),
-                              // validator: (value) {
-                              //   if (value.isEmpty) {
-                              //     return "Please enter the Restaurant's Phone number";
-                              //   }
-                              // },
-                              // onSaved: (val) =>
-                              //     setState(() => _user.restNum = val)),
-                              //     TextFormField(
-                              // decoration:
-                              //     InputDecoration(labelText: "Kindly enter another phone number"),
-                              // validator: (value) {
-                              //   if (value.isEmpty) {
-                              //     return "Kindly enter another phone number";
-                              //   }
-                              // },
-                              // onSaved: (val) =>
-                              //     setState(() => _user.restNum2 = val)),
-                              //     TextFormField(
-                              // decoration:
-                              //     InputDecoration(labelText: "Restaurant's image"),
-                              // validator: (value) {
-                              //   if (value.isEmpty) {
-                              //     return "Please enter the Restaurant's image";
-                              //   }
-                              // },
-                              // onSaved: (val) =>
-                              //     setState(() => _user.imageURL = val)),
-                              //     TextFormField(
-                              // decoration:
-                              //     InputDecoration(labelText: "Kindly eneter the GM's name"),
-                              // validator: (value) {
-                              //   if (value.isEmpty) {
-                              //     return "Kindly eneter the GM's name";
-                              //   }
-                              // },
-                              // onSaved: (val) =>
-                              //     setState(() => _user.gmName = val)),
-                              //     TextFormField(
-                              // decoration:
-                              //     InputDecoration(labelText: "Kindly eneter the GM's phone number"),
-                              // validator: (value) {
-                              //   if (value.isEmpty) {
-                              //     return "Kindly eneter the GM's phone number";
-                              //   }
-                              // },
-                              // onSaved: (val) =>
-                              //     setState(() => _user.gmNum = val)),
-                              //     TextFormField(
-                              // decoration:
-                              //     InputDecoration(labelText: "Kindly eneter the GM's E-mail address"),
-                              // validator: (value) {
-                              //   if (value.isEmpty) {
-                              //     return "Kindly eneter the GM's E-mail address";
-                              //   }
-                              // },
-                              // onSaved: (val) =>
-                              //     setState(() => _user.gmMail = val)),
-                                
                           Container(
                             padding: const EdgeInsets.fromLTRB(0, 50, 0, 20),
                             child: Text('Recieve our apps recent news?'),
@@ -244,24 +138,11 @@ class _AddMenueState extends State <AddMenue> {
                                       form.save();
                                     
                                     }
-                                    menueMap['firstName'] = _menue.mealName;
-                                    menueMap['lastName'] = _menue.mealPrice;
-                                    menueMap['restname'] = _menue.timeToDone;
-                                    // menueMap['latitude'] = _user.latitude;
-                                    // menueMap['longitude'] = _user.longitude;
-                                    // menueMap['gmNum'] = _user.gmNum;
-                                    // menueMap['gmName'] = _user.gmName;
-                                    // menueMap['branNum'] = _user.branNum;
-                                    // menueMap['gmMail'] = _user.gmMail;
-                                    // menueMap['hqLocation'] = _user.hqLocation;
-                                    // menueMap['hotLine'] = _user.hotLine;
-                                    // menueMap['restNum'] = _user.restNum;
-                                    // menueMap['restNum2'] = _user.restNum2;
+                                    menueMap['mealName'] = _menue.mealName;
+                                    menueMap['mealPrice'] = _menue.mealPrice;
+                                    menueMap['timeToDone'] = _menue.timeToDone;
                                     menueMap['newsletter'] = _menue.newsletter;
-                                    print(_menue);
-                                    //Image_picker();
-                                   // ResturantManagement().addNewResturant(context, menueMap);
-                                    //Navigator.push(context, PageTransition(type: PageTransitionType.leftToRight, child: Image_picker()));
+                                    MenuManagement().addMenuItem(context, mealName:  _menue.mealName, mealPrice: _menue.mealPrice, timeToDone: _menue.timeToDone, newsletter: _menue.newsletter, docID: widget.docID);
                                   })
                           ),
                         ])

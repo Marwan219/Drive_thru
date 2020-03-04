@@ -25,6 +25,12 @@ class AuthService with ChangeNotifier{
     }
   }
 
+  idOfUser() async{
+    FirebaseUser user = await AuthService().getUser();
+    var id = user.uid;
+    return id;
+  }
+
   Future signOutUser() async{
     var result = await _auth.signOut();
     notifyListeners();
