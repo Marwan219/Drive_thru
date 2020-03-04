@@ -7,7 +7,7 @@ import './ProductPage.dart';
 import 'package:drive_thru/src/screens/HomePage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:page_transition/page_transition.dart';
-
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 
 
@@ -180,7 +180,10 @@ class _MenuState extends State<Menu> {
        Expanded(  
          child: _menuItems.length == 0  
              ? Center(  
-                 child: Text('No Data...'),  
+                 child: SpinKitThreeBounce(
+                color: Colors.orange,
+               size: 20.0,
+                ),
                )  
              : ListView.builder(  
                  controller: _scrollController,  
@@ -212,20 +215,26 @@ class _MenuState extends State<Menu> {
                 }  
                ),  
        ),  
-       isLoading  
-           ? Container(  
-               width: MediaQuery.of(context).size.width,  
-               padding: EdgeInsets.all(5),  
-               color: Colors.yellowAccent,  
-               child: Text(  
-                 'Loading',  
-                 textAlign: TextAlign.center,  
-                 style: TextStyle(  
-                   fontWeight: FontWeight.bold,  
-                 ),  
-               ),  
-             )  
-           : Container()  
+      //  isLoading  
+      //      ? Container(  
+
+      //       child: SpinKitThreeBounce(
+      //           color: Colors.orange,
+      //          size: 20.0,
+      //           ),
+              //  width: MediaQuery.of(context).size.width,  
+              //  padding: EdgeInsets.all(5),  
+              //  color: Colors.yellowAccent,  
+              //  child: Text(  
+              //    'Loading',  
+              //    textAlign: TextAlign.center,  
+              //    style: TextStyle(  
+              //      fontWeight: FontWeight.bold,  
+              //    ),  
+              //  ),  
+          //    )  
+          //  : 
+           Container()  
      ]),  
     );}
 }
