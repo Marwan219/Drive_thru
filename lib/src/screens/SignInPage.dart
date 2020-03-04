@@ -1,4 +1,5 @@
 import 'package:drive_thru/src/screens/Menu.dart';
+import 'package:drive_thru/src/screens/NewDashboard.dart';
 import 'package:drive_thru/src/shared/Loading.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +7,6 @@ import '../shared/styles.dart';
 import '../shared/colors.dart';
 import 'package:page_transition/page_transition.dart';
 import './SignUpPage.dart';
-import 'Dashboard.dart';
 
 class SignInPage extends StatefulWidget {
   final String pageTitle;
@@ -30,6 +30,7 @@ class _SignInPageState extends State<SignInPage> {
   @override
   Widget build(BuildContext context) {
     return loading ? Loading() : Scaffold(
+      resizeToAvoidBottomPadding: false,
       appBar: AppBar(
         elevation: 0,
         backgroundColor: white,
@@ -139,7 +140,7 @@ class _SignInPageState extends State<SignInPage> {
                       email: _email,
                       password: _password
                     ).then((user){
-                      Navigator.pushReplacement(context, PageTransition(type: PageTransitionType.rightToLeft, child: DashBoard()));
+                      Navigator.pushReplacement(context, PageTransition(type: PageTransitionType.rightToLeft, child: NewDashboard()));
                     }).catchError((e) {
                       setState((){
                         loading = false;

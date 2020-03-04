@@ -25,10 +25,9 @@ class _HomePageState extends State<HomePage> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          Image.asset('images/welcome.png', width: MediaQuery.of(context).size.width * 0.35, height: MediaQuery.of(context).size.height * 0.35 ),
-          Container(
-            margin: EdgeInsets.only(bottom: 10, top: 0),
-            child: Text('Virtual Drive-Thru!', style: logoStyle),
+          Image.asset('images/logotempoo.png', 
+                      width: MediaQuery.of(context).size.width * 0.50, 
+                      height: MediaQuery.of(context).size.height * 0.50 
           ),
           Container(
             width: 200,
@@ -46,21 +45,6 @@ class _HomePageState extends State<HomePage> {
               // Navigator.of(context).pushReplacementNamed('/signup');
              }),
           ),
-          Container(
-            margin: EdgeInsets.only(top: 25),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-
-              children: <Widget>[
-                Text('Langauage:', style: TextStyle(color: darkText)),
-                Container(
-                  margin: EdgeInsets.only(left: 6),
-                  child: Text('English ›', style: TextStyle(color: Colors.black, fontWeight: FontWeight.w500)),
-                )
-              ],
-            ),
-          )
         ],
       )),
       backgroundColor: bgColor,

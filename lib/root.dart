@@ -1,9 +1,9 @@
-import 'package:drive_thru/src/screens/Dashboard.dart';
 import 'package:drive_thru/src/screens/HomePage.dart';
-import 'package:drive_thru/src/services/AuthService.dart';
+import 'package:drive_thru/src/screens/NewDashboard.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+String uID;
 class Root extends StatefulWidget {
   //Root({this.current});
   //final AuthService current;
@@ -25,6 +25,7 @@ class _RootState extends State<Root> {
     FirebaseAuth.instance.currentUser().then((user){
       setState((){
         authStatus = user == null ? AuthStatus.notSignedIn : AuthStatus.signedIn;
+        uID = user.uid;
       });
     });
   }
@@ -33,7 +34,7 @@ class _RootState extends State<Root> {
   Widget build(BuildContext context) {
     switch (authStatus){
       case AuthStatus.signedIn:
-        return DashBoard();
+        return NewDashboard(userID: uID,);
       case AuthStatus.notSignedIn:
         // TODO: Handle this case.
         return HomePage(pageTitle: 'Welcome');
