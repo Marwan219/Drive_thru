@@ -7,6 +7,7 @@ import '../shared/styles.dart';
 import '../shared/colors.dart';
 import 'package:page_transition/page_transition.dart';
 import './SignUpPage.dart';
+import '../../root.dart';
 
 class SignInPage extends StatefulWidget {
   final String pageTitle;

@@ -31,17 +31,19 @@ dependencies:
   cloud_firestore:
   page_transition: '^1.0.9'
   smooth_star_rating: '1.0.2'
-  flutter_spinkit: "^4.1.1"
+  # flutter_spinkit: "^4.1.1"
   firebase_storage:
   image_picker:
   google_maps_flutter: ^0.4.0
+  font_awesome_flutter: ^8.7.0
   #location: ^1.4.1
   #geocoder: 
   #cupertino_icons:
   animated_dialog_box:
   fancy_dialog: 
   flutter_sequence_animation:
-
+  flutter_spinkit: "^4.1.2"
+ 
 dev_dependencies:
   flutter_test:
     sdk: flutter
