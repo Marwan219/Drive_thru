@@ -2,14 +2,14 @@ import 'package:drive_thru/src/screens/HomePage.dart';
 import 'package:drive_thru/src/screens/NewDashboard.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
+String uID;
 class Root extends StatefulWidget {
   //Root({this.current});
   //final AuthService current;
   @override
   _RootState createState() => _RootState();
 }
-String uID;
+
 enum AuthStatus{
   notSignedIn,
   signedIn,

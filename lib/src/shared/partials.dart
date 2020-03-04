@@ -19,8 +19,8 @@ import '../shared/styles.dart';
       children: <Widget>[
         Container(
           //  width: double.infinity,
-          height: 190,
-          width:500,
+          height: MediaQuery.of(context).size.height*0.30 ,
+          width:MediaQuery.of(context).size.width*0.99,
           padding: EdgeInsets.all(9),
           
             child:
