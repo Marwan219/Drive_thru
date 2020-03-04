@@ -14,7 +14,7 @@ import 'package:drive_thru/src/shared/colors.dart';
 import './Carts.dart';
 import './survey.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-
+import '../../root.dart';
 //import './popup.dart';
 
 class NewDashboard extends StatefulWidget {
@@ -284,7 +284,7 @@ class _NewDashboardState extends State<NewDashboard> {
      ]
     ),
     floatingActionButton: FloatingActionButton( onPressed: () {
-                  Navigator.push(context, PageTransition(type: PageTransitionType.leftToRightWithFade, child: Carts(uid: widget.userID,)));
+                  Navigator.push(context, PageTransition(type: PageTransitionType.leftToRightWithFade, child: Carts(uid: uID,)));
                   }, child: Icon(Icons.shopping_cart)),  
    ); 
  }
