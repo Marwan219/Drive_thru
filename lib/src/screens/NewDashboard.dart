@@ -1,7 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:drive_thru/src/screens/menu.dart';
-import 'package:drive_thru/src/screens/wallet.dart';
-import '../services/walletMangement.dart';
 import 'package:drive_thru/src/shared/partials.dart';
 import 'package:flutter/material.dart';
 import 'package:drive_thru/src/screens/HomePage.dart';
@@ -182,16 +180,6 @@ class _NewDashboardState extends State<NewDashboard> {
               title: Text('Settings'),
               onTap: () {
                 Navigator.of(context).pop();
-              },
-            ),
-              ListTile(
-              title: Text('Wallet'),
-              onTap: () {
-               Navigator.push(
-                    context,
-                    PageTransition(
-                        type: PageTransitionType.leftToRightWithFade,
-                        child: Wallet()));
               },
             ),
             ListTile(
