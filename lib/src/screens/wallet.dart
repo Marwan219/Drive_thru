@@ -1,29 +1,22 @@
-import 'package:drive_thru/src/services/walletMangement.dart';
 import 'package:drive_thru/src/shared/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:drive_thru/src/screens/menu.dart';
-import 'package:drive_thru/src/shared/partials.dart';
-import 'package:flutter/material.dart';
-import 'package:drive_thru/src/screens/AddResturant.dart';
-import 'package:drive_thru/src/screens/HomePage.dart';
-import 'package:drive_thru/src/services/FetshingData.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:page_transition/page_transition.dart';
 import '../../root.dart';
 import '../shared/styles.dart';
 import '../shared/colors.dart';
-import './Carts.dart';
+import '../services/chargeMangement.dart';
 import './survey.dart';
 import './NewDashboard.dart';
-import '../shared/colors.dart';
+
 import '../shared/buttons.dart';
 
-
 class Wallet extends StatefulWidget {
-  double balance=0;
-  String addedvalue="";
-  String _useremail;
+  double balance = 0;
+  int code =0;
+  String addedvalue = "";
+ 
   Wallet({Key key}) : super(key: key);
 
   @override
@@ -31,11 +24,27 @@ class Wallet extends StatefulWidget {
 }
 
 class _WalletState extends State<Wallet> {
+
+  getbalalnce() { 
+       Firestore.instance
+        .collection("users")
+        .document(uID) // uID is global variabe passed by root page
+        .get()
+        .then((DocumentSnapshot userWallet) {
+      setState(() {
+        widget.balance = userWallet.data["wallet"];
+
+    print(widget.balance);
+      });
+    });
+
+    print("called");
+  } 
   @override
-  void initState()  {
+  void initState() {
     // TODO: implement initState
     super.initState();
-     Firestore.instance
+    Firestore.instance
         .collection("users")
         .document(uID) // uID is global variabe passed by root page
         .get()
@@ -70,7 +79,11 @@ class _WalletState extends State<Wallet> {
             ListTile(
               title: Text('Home Page'),
               onTap: () {
-                Navigator.pushReplacement(context, PageTransition(type: PageTransitionType.rightToLeft, child: NewDashboard()));
+                Navigator.pushReplacement(
+                    context,
+                    PageTransition(
+                        type: PageTransitionType.rightToLeft,
+                        child: NewDashboard()));
               },
             ),
             ListTile(
@@ -246,44 +259,17 @@ class _WalletState extends State<Wallet> {
                           children: <Widget>[
                             TextField(
                               onChanged: (value) {
-                                  widget.addedvalue=value;
+                                widget.code = int.parse(value);
                               },
-                              keyboardType: TextInputType.emailAddress,
-                              cursorColor: primaryColor,
-                              style: inputFieldTextStyle,
-                              decoration: InputDecoration(
-                                  hintText: 'Value',
-                                  hintStyle: inputFieldHintTextStyle,
-                                  focusedBorder: inputFieldFocusedBorderStyle,
-                                  contentPadding: EdgeInsets.symmetric(
-                                      horizontal: 5, vertical: 5),
-                                  border: inputFieldDefaultBorderStyle),
                             ),
                             SizedBox(
                               height: 10,
                             ),
-                            TextField(
-                              onChanged: (value) {
-                                widget._useremail = value;
-                              },
-                              keyboardType: TextInputType.emailAddress,
-                              cursorColor: primaryColor,
-                              style: inputFieldTextStyle,
-                              decoration: InputDecoration(
-                                  hintText: 'Email',
-                                  hintStyle: inputFieldHintTextStyle,
-                                  focusedBorder: inputFieldFocusedBorderStyle,
-                                  contentPadding: EdgeInsets.symmetric(
-                                      horizontal: 5, vertical: 5),
-                                  border: inputFieldDefaultBorderStyle),
-                            ),
-                            froyoFlatBtn('Add Amount', () {
-                              
-                              // WalletMangement().addTowallet(this.addedvalue,context,uID);
-                              WalletMangement().updatewalletbymail(context,
-                                  useremail: widget._useremail,
-                                  value: widget.addedvalue);
-                            }),
+                            froyoFlatBtn('Add Amount', () async{
+                            
+                              await Charge().chargeaccount(widget.code, widget.balance);
+                              this.getbalalnce();
+                            })
                           ],
                         )),
                   ));
@@ -292,7 +278,7 @@ class _WalletState extends State<Wallet> {
         textColor: primaryColor,
         highlightedBorderColor: highlightColor,
         borderSide: BorderSide(color: primaryColor),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
       ),
       width: _media.width * .80,
     );

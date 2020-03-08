@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:drive_thru/src/screens/ChargeWallet.dart';
-import 'package:drive_thru/src/screens/Buy.dart';
+import 'wallet.dart';
 import 'package:drive_thru/src/screens/Notifications.dart';
 import 'package:drive_thru/src/screens/menu.dart';
 import 'package:drive_thru/src/services/codeGen.dart';
@@ -194,6 +194,16 @@ class _NewDashboardState extends State<NewDashboard> {
                         content: new Text("Timpo Map will be coming soon 🙂"),
                     )
                 );}
+            ),
+             ListTile(
+              title: Text('Wallet'),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    PageTransition(
+                        type: PageTransitionType.leftToRightWithFade,
+                        child: Wallet()));
+              },
             ),
             ListTile(
               title: Text('Settings'),
