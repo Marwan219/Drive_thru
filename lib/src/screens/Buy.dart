@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:drive_thru/src/screens/Orders.dart';
+import 'package:drive_thru/src/services/walletMangement.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import './Timerpage.dart';
@@ -539,9 +540,13 @@ class _BuyState extends State<Buy> {
               margin: EdgeInsets.only(top: 10, bottom: 2),
               decoration: rescardstyle,
               child: FlatButton(
-                onPressed: () {
-                  
-                  Firestore.instance.collection('/Restaurants').document(widget.resturantID).collection('Orders').add({
+                onPressed: () async {
+
+                  await WalletMangement().walletdecrease(context, widget.productPrice *
+                            widget.product_quantity);
+                            
+                  if (order_booked==true){
+                 await Firestore.instance.collection('/Restaurants').document(widget.resturantID).collection('Orders').add({
                     'Meal Name' : widget.pageTitle,
                     'Meal Price' : widget.productPrice,
                     'Units' : widget.product_quantity,
@@ -550,6 +555,8 @@ class _BuyState extends State<Buy> {
                     Navigator.pushReplacement(context, PageTransition(type: PageTransitionType.leftToRight, child: Orders()));
                   }).catchError((e){print(e);});
                             
+                }
+                
                 },
                 child: Text('Buy', style: contrastTextBold),
               ))

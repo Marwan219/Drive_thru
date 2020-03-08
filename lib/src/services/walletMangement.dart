@@ -7,7 +7,7 @@ import 'package:validators/validators.dart';
 
 // passed value between pages specially for wallet page
 double valuepaseed = 0.0;
-
+bool order_booked=false;
 // create new class
 class WalletMangement {
 // new variables to reseive the data form the database online
@@ -26,7 +26,7 @@ class WalletMangement {
   }
 
 // walletdecrease function is set to get the data from the online data and update the date + setting the passed value
-  walletdecrease(context, totalprice) async {
+   walletdecrease(context, totalprice) async {
     await Firestore.instance
         .collection("users")
         .document(uID) // uID is global variabe passed by root page
@@ -40,8 +40,8 @@ class WalletMangement {
     if (newwallet > 0) {
       // calculate new value to update user wallet
 
-      valuepaseed =
-          newwallet; // this to pass value of the walelt in the wallt page
+      valuepaseed = newwallet; // this to pass value of the walelt in the wallt page
+      order_booked = true ;
       // update data in the firestore field  of the current user
       await Firestore.instance
           .collection("users")
@@ -69,6 +69,7 @@ class WalletMangement {
       );
     } // updating data
     else {
+      order_booked=false;
       AlertDialog alert = AlertDialog(
         title: Text("Sorry 🙂"),
         content: Text("please check your wallet "),
