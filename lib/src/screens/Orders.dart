@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:drive_thru/root.dart';
 import 'package:drive_thru/src/screens/Orders.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
@@ -60,7 +61,7 @@ class _OrdersState extends State<Orders>{
    });  
    QuerySnapshot querySnapshot;  
      querySnapshot = await _firestore
-        .collection('/users').document(widget.uid).collection('Cart')
+        .collection('/users').document(uID).collection('Cart')
         .orderBy("Meal Name")
         .getDocuments(); 
     print(querySnapshot.documents[0].data['Item Image URL']);

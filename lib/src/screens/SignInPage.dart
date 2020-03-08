@@ -1,4 +1,4 @@
-import 'package:drive_thru/src/screens/Menu.dart';
+
 import 'package:drive_thru/src/screens/NewDashboard.dart';
 import 'package:drive_thru/src/shared/Loading.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -8,6 +8,7 @@ import '../shared/colors.dart';
 import 'package:page_transition/page_transition.dart';
 import './SignUpPage.dart';
 import '../../root.dart';
+import 'NewDashboard.dart';
 
 class SignInPage extends StatefulWidget {
   final String pageTitle;
@@ -92,7 +93,7 @@ class _SignInPageState extends State<SignInPage> {
                         email: _email,
                         password: _password
                       ).then((user){
-                       Navigator.pushReplacement(context, PageTransition(type: PageTransitionType.rightToLeft, child: Menu()));
+                       Navigator.pushReplacement(context, PageTransition(type: PageTransitionType.rightToLeft, child: NewDashboard()));
                       }).catchError((e) {
                         setState((){
                           loading = false;
