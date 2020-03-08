@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../shared/styles.dart';
 import '../shared/colors.dart';
 import '../shared/buttons.dart';
-
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:page_transition/page_transition.dart';
 import './SignUpPage.dart';
 import './SignInPage.dart';

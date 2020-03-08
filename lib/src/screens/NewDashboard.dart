@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:drive_thru/src/screens/ChargeWallet.dart';
+import 'package:drive_thru/src/screens/Buy.dart';
+import 'package:drive_thru/src/screens/Notifications.dart';
 import 'package:drive_thru/src/screens/menu.dart';
 import 'package:drive_thru/src/services/codeGen.dart';
 import 'package:drive_thru/src/shared/partials.dart';
@@ -13,6 +15,8 @@ import '../shared/partials.dart';
 import 'package:drive_thru/src/shared/colors.dart';
 import './Carts.dart';
 import './survey.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import '../../root.dart';
 //import './popup.dart';
 
 class NewDashboard extends StatefulWidget {
@@ -127,17 +131,30 @@ class _NewDashboardState extends State<NewDashboard> {
           backgroundColor: primaryColor,
           title:
               Text('Timpo', style: logoWhiteStyle, textAlign: TextAlign.center),
+              
               actions: <Widget>[
-            FlatButton(
+            
+                 FlatButton(
                 onPressed: () {
-                  Navigator.push(context, PageTransition(type: PageTransitionType.leftToRightWithFade, child: Carts(uid: widget.userID,)));
+                  Navigator.push(context, PageTransition(type: PageTransitionType.leftToRightWithFade, child: Notifications()));
                   },
                 color: primaryColor,
-                padding: EdgeInsets.all(2),
+               padding: EdgeInsets.all(10),
                shape: CircleBorder(),
-                child: Icon(Icons.shopping_cart, color: white, size: 25,),
+                child: Icon(Icons.notifications, color: white, size: 25,),
             
             ),
+            // FlatButton(
+            //     onPressed: () {
+            //       Navigator.push(context, PageTransition(type: PageTransitionType.leftToRightWithFade, child: Carts(uid: widget.userID,)));
+            //       },
+            //     color: primaryColor,
+            //    padding: EdgeInsets.all(0),
+            //    shape: CircleBorder(),
+            //     child: Icon(Icons.shopping_cart, color: white, size: 25,),
+            
+            // ),
+           
               ],
      ),  
      drawer: new Drawer(
@@ -228,9 +245,13 @@ class _NewDashboardState extends State<NewDashboard> {
        Expanded(  
          child: _resturants.length == 0  
              ? Center(  
-                 child: Text('No Data...'),  
+                 child: SpinKitThreeBounce(
+                color: Colors.orange,
+               size: 20.0,
+                ),  
                )  
-             : ListView.builder(
+             : 
+             ListView.builder(
                  controller: _scrollController,  
                  itemCount: _resturants.length,  
                  itemBuilder: (context, index) {  
@@ -255,27 +276,34 @@ class _NewDashboardState extends State<NewDashboard> {
                  },  
                ), 
        ),  
-       isLoading  
-           ? Container(  
-               width: MediaQuery.of(context).size.width,  
-               padding: EdgeInsets.all(5),  
-               color: Colors.orangeAccent,  
-               child: Text(  
-                 'Loading',  
-                 textAlign: TextAlign.center,  
-                 style: TextStyle(  
-                   fontWeight: FontWeight.bold,  
-                 ),  
-               ),  
-             )  
+      //  isLoading  
+      //      ? Container(  
+      //        child: SpinKitThreeBounce(
+      //           color: Colors.orange,
+      //          size: 20.0,
+      //           ),
+              
+              //  width: MediaQuery.of(context).size.width,  
+              //  padding: EdgeInsets.all(5),  
+              //  color: Colors.orangeAccent,  
+              //  child: Text(  
+              //    'Loading',  
+              //    textAlign: TextAlign.center,  
+              //    style: TextStyle(  
+              //      fontWeight: FontWeight.bold,  
+              //    ),  
+              //  ),  
+          //    )  
              
              
-           : Container(
-             
-           )  
+          //  : 
+           
            
      ]
-    ),  
+    ),
+    floatingActionButton: FloatingActionButton( onPressed: () {
+                  Navigator.push(context, PageTransition(type: PageTransitionType.leftToRightWithFade, child: Carts(uid: uID,)));
+                  }, child: Icon(Icons.shopping_cart)),  
    ); 
  }
 }

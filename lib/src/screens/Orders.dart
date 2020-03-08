@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:drive_thru/src/screens/Buy.dart';
 import 'package:drive_thru/src/screens/Orders.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
@@ -8,15 +7,17 @@ import '../shared/colors.dart';
 import 'ProductPage.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
-class Carts extends StatefulWidget{
-  final String uid;
-  final String resturantID;
-  Carts({Key key, this.uid, this.resturantID}) : super(key: key);
-  @override
-  _CartsState createState() => _CartsState();
-}
 
-class _CartsState extends State<Carts>{
+class Orders extends StatefulWidget{
+   final String uid;
+  final String resturantID;
+  Orders({Key key, this.uid, this.resturantID}) : super(key: key);
+  @override
+  _OrdersState createState() => _OrdersState();
+}
+class _OrdersState extends State<Orders>{
+  @override
+
   Firestore _firestore = Firestore.instance;
   List<DocumentSnapshot> _cartItems = [];
   bool isLoading = false;
@@ -94,7 +95,7 @@ class _CartsState extends State<Carts>{
           elevation: 0,
           backgroundColor: primaryColor,
           title:
-              Text('Cart', style: logoWhiteStyle, textAlign: TextAlign.center),
+              Text('Your Order', style: logoWhiteStyle, textAlign: TextAlign.center),
               // actions: <Widget>[
               //   new
               // ],
@@ -103,7 +104,10 @@ class _CartsState extends State<Carts>{
        Expanded(  
          child: _cartItems.length == 0  
              ? Center(  
-                 child: Text('Your Carts Is Empty!'),  
+                 child:  SpinKitThreeBounce(
+                color: Colors.orange,
+               size: 20.0,
+                ),
                )  
              : ListView.builder(    
                  itemCount: _cartItems.length,  
@@ -135,11 +139,11 @@ class _CartsState extends State<Carts>{
                ),  
        ),  
       //  isLoading  
-          //  ? Container(
-          //     child: SpinKitThreeBounce(
-          //       color: Colors.orange,
-          //      size: 20.0,
-          //       ),  
+      //      ? Container(  
+      //         child: SpinKitThreeBounce(
+      //           color: Colors.orange,
+      //          size: 20.0,
+      //           ),
               //  width: MediaQuery.of(context).size.width,  
               //  padding: EdgeInsets.all(5),  
               //  color: Colors.yellowAccent,  
@@ -150,25 +154,10 @@ class _CartsState extends State<Carts>{
               //      fontWeight: FontWeight.bold,  
               //    ),  
               //  ),  
-            //  )  
+          //    )  
           //  :
             Container()  
-     ]),  
-        bottomNavigationBar: new Container(
-          color: Colors.white,
-          child: Row(children: <Widget>[
-            Expanded(child: ListTile(title: new Text("Total:"),
-            trailing: Text(getCartTotal(_cartItems).toString()),
-            ),),
-             Expanded(child: new MaterialButton(onPressed:(){
-             Navigator.pushReplacement(context, PageTransition(type: PageTransitionType.leftToRight, child: Orders()));
-              },
-            child: new Text("Check Out", style: TextStyle(color: Colors.black)),
-           color:Colors.red, ),
-            )
-          ],)
-        ),
-    );
+     ]));  
   }
 
 

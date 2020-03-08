@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:drive_thru/src/screens/Orders.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import './Timerpage.dart';
@@ -9,7 +10,6 @@ enum SingingCharacter { car, walk }
 
 class Buy extends StatefulWidget {
   double price = 0;
-
   List data = [
     {"car_number": "", "car_color": "", "car_Type": "", "car_model": ""},
     {
@@ -547,7 +547,7 @@ class _BuyState extends State<Buy> {
                     'Units' : widget.product_quantity,
                     'Time To Done' : widget.timeToDone
                   }).then((value){
-                    Navigator.pushReplacement(context, PageTransition(type: PageTransitionType.leftToRight, child: TimerPage(timeInMen: widget.timeToDone,)));
+                    Navigator.pushReplacement(context, PageTransition(type: PageTransitionType.leftToRight, child: Orders()));
                   }).catchError((e){print(e);});
                             
                 },
