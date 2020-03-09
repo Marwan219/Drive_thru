@@ -267,7 +267,7 @@ class _WalletState extends State<Wallet> {
                             ),
                             froyoFlatBtn('Add Amount', () async{
                             
-                              await Charge().chargeaccount(widget.code, widget.balance);
+                              await Charge().chargeaccount(code:widget.code,balance:widget.balance,context: context );
                               this.getbalalnce();
                             })
                           ],
