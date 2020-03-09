@@ -1,4 +1,4 @@
-// import 'package:drive_thru/src/screens/NewDashboard.dart';
+import 'package:drive_thru/src/screens/NewDashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:page_transition/page_transition.dart';
@@ -18,8 +18,8 @@ class SurveyManagement{
     Firestore.instance.collection('Survey').document('Q4').collection('Answers').add({
       'Answer': answer4,
     }).then((value){
-      //Navigator.of(context).pop();
-      // Navigator.pushReplacement(context, PageTransition(type: PageTransitionType.rightToLeft, child: NewDashboard()));
+      Navigator.of(context).pop();
+      Navigator.pushReplacement(context, PageTransition(type: PageTransitionType.rightToLeft, child: NewDashboard()));
     }).catchError((e){print(e);});
 
   }
