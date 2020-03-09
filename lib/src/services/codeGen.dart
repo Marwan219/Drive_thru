@@ -28,6 +28,7 @@ class CodeGenerator{
         'value' : value,
         'code':list[0],
         'Time created': 0000,
+        'validation':true
       }).catchError((onError){
         print(e);
       });
