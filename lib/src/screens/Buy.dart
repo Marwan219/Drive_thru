@@ -6,6 +6,9 @@ import 'package:page_transition/page_transition.dart';
 import './Timerpage.dart';
 import '../shared/styles.dart';
 import '../shared/colors.dart';
+import '../../generated/intl/l10n.dart';
+import '../../generated/intl/helper.dart';
+
 
 enum SingingCharacter { car, walk }
 

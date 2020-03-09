@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 
 class MenuManagement{
-  // final String resturantID;
-  // MenuManagement(this.resturantID);
+  final String resturantID;
+  MenuManagement(this.resturantID);
 
   addMenuItem(context, {mealName, mealPrice, timeToDone, newsletter, docID}) async{
     final docRef = await Firestore.instance.collection('/Restaurants').document(docID).collection('Menu').add({

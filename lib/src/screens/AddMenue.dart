@@ -141,7 +141,7 @@ class _AddMenueState extends State <AddMenue> {
                                     menueMap['mealPrice'] = _menue.mealPrice;
                                     menueMap['timeToDone'] = _menue.timeToDone;
                                     menueMap['newsletter'] = _menue.newsletter;
-                                    MenuManagement().addMenuItem(context, mealName:  _menue.mealName, mealPrice: _menue.mealPrice, timeToDone: _menue.timeToDone, newsletter: _menue.newsletter, docID: widget.docID);
+                                    MenuManagement(widget.docID).addMenuItem(context, mealName:  _menue.mealName, mealPrice: _menue.mealPrice, timeToDone: _menue.timeToDone, newsletter: _menue.newsletter, docID: widget.docID);
                                   })
                           ),
                         ])

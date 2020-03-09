@@ -1,0 +1,256 @@
+{
+    "@@last_modified": "2020-02-08T21:15:20.330967",
+    "allCategory": "All Categories",
+    "@allCategory": {
+        "description": "All Cateogries option",
+        "type": "text",
+        "placeholders": {}
+    },
+    "frieds": "Freids",
+    "@frieds": {
+        "description": "Freids Menu",
+        "type": "text",
+        "placeholders": {}
+    },
+    "fastFood": "Fast Food",
+    "@fastFood": {
+        "description": "Fast Food Menu",
+        "type": "text",
+        "placeholders": {}
+    },
+    "creamery": "Creamery",
+    "@creamery": {
+        "description": "Creamery Menu",
+        "type": "text",
+        "placeholders": {}
+    },
+    "hotDrinks": "Hot_drinks",
+    "@hotDrinks": {
+        "description": "Hot_drinks Menu",
+        "type": "text",
+        "placeholders": {}
+    },
+    "vegetables": "Vegetables ",
+    "@vegetables": {
+        "description": "Vegetables  Menu",
+        "type": "text",
+        "placeholders": {}
+    },
+    "resturants": "Resturants",
+    "@resturants": {
+        "description": "Resturants  Menu",
+        "type": "text",
+        "placeholders": {}
+    },
+   
+    
+
+
+
+
+
+
+
+  "homePage": "Home Page",
+  "@homePage": {
+    "description": "Home Page ",
+    "type": "text",
+    "placeholders": {}
+  },
+  "myProfile": "My Profile",
+  "@myProfile": {
+    "description": "My Profile",
+    "type": "text",
+    "placeholders": {}
+  },
+  "myCart": "My Cart",
+  "@myCart": {
+    "description": "My Cart",
+    "type": "text",
+    "placeholders": {}
+  },
+  "store": "Store",
+  "@store": {
+    "description": "Store",
+    "type": "text",
+    "placeholders": {}
+  },
+  "addResturant": "Add Resturant",
+  "@addResturant": {
+    "description": "Add Resturant",
+    "type": "text",
+    "placeholders": {}
+  },
+  "setting": "Setting",
+  "@setting": {
+    "description": "Setting",
+    "type": "text",
+    "placeholders": {}
+  },
+  "timerPage": "Timer Page",
+  "@timerPage": {
+  "description": "Timer Page",
+  "type": "text",
+  "placeholders": {}
+    },
+"language": "Language",
+"@language": {
+    "description": "Language",
+    "type": "text",
+    "placeholders": {}
+},
+  "signOut": "Sing Out",
+  "@signOut": {
+    "description": "Sing Out",
+    "type": "text",
+    "placeholders": {}
+  },
+    "signIn": "Sing In",
+    "@signIn": {
+        "description": "Sing In button",
+        "type": "text",
+        "placeholders": {}
+    },
+    "signInph": "Sing In",
+    "@signInph": {
+        "description": "Sing In button",
+        "type": "text",
+        "placeholders": {}
+    },
+    "signUp": "Sing Up",
+    "@signUp": {
+        "description": "Sing Up button",
+        "type": "text",
+        "placeholders": {}
+    },
+
+
+
+
+
+    "menutxt": "Menu",
+    "@menutxt": {
+        "description": "Menu container",
+        "type": "text",
+        "placeholders": {}
+    },
+
+    
+  
+"quantity": "Quantity",
+"@quantity": {
+    "description": "Quantity container",
+    "type": "text",
+    "placeholders": {}
+},
+"buyNowbtn": "Buy Now",
+"@buyNowbtn": {
+    "description": "BuyNowbtn container",
+    "type": "text",
+    "placeholders": {}
+},
+"addToCartbtn": "Add To Cart",
+"@addToCartbtn": {
+    "description": "addToCartbtn container",
+    "type": "text",
+    "placeholders": {}
+}, 
+
+
+
+"bill": "Bill",
+"@bill": {
+    "description": "bill txt",
+    "type": "text",
+    "placeholders": {}
+},
+"items": "Items",
+"@items": {
+    "description": "items txt",
+    "type": "text",
+    "placeholders": {}
+},
+"price": "Price",
+"@price": {
+    "description": "price txt",
+    "type": "text",
+    "placeholders": {}
+},
+"totalPrice": "Totoal Price",
+"@totalPrice": {
+    "description": "totalPrice txt",
+    "type": "text",
+    "placeholders": {}
+},
+"chooseAvailableCoins": "Choose Available Coins",
+"@chooseAvailableCoins": {
+    "description": "chooseAvailableCoins txt",
+    "type": "text",
+    "placeholders": {}
+},
+"deliveryOption": "Delivery Option",
+"@deliveryOption": {
+    "description": "deliveryOption txt",
+    "type": "text",
+    "placeholders": {}
+},
+"car": "Car",
+"@car": {
+    "description": "car txtr",
+    "type": "text",
+    "placeholders": {}
+},
+"carSpec": "Car Specs",
+"@carSpec": {
+    "description": "Car specs txt",
+    "type": "text",
+    "placeholders": {}
+},
+"carNumber": "Car Number",
+"@carNumber": {
+    "description": "carNumber txt",
+    "type": "text",
+    "placeholders": {}
+},
+"carModel": "Car Model",
+"@carModel": {
+    "description": "carModel txt",
+    "type": "text",
+    "placeholders": {}
+},
+"carColor": "Car Color",
+"@carColor": {
+    "description": "carColor txt",
+    "type": "text",
+    "placeholders": {}
+},
+"walk": "Walk",
+"@walk": {
+    "description": "Walk container",
+    "type": "text",
+    "placeholders": {}
+},
+"personalInfo": "Personal Information",
+"@personalInfo": {
+    "description": "personalInfo txt",
+    "type": "text",
+    "placeholders": {}
+},
+"phoneNumber": "Phone Number",
+"@phoneNumber": {
+    "description": "PhoneNumber txt",
+    "type": "text",
+    "placeholders": {}
+},
+"name": "Name",
+"@name": {
+    "description": "name txt",
+    "type": "text",
+    "placeholders": {}
+}
+
+
+
+}
+
+

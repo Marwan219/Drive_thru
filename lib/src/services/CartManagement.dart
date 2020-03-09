@@ -17,9 +17,7 @@ class CartManagement{
     docRef.documentID;
     
     print('Uploaded');
-      //Navigator.of(context).pop();
-      
- 
+      Navigator.of(context).pop();
     Navigator.push(context, PageTransition(type: PageTransitionType.leftToRight, child: Carts(uid:docID)));
   
   }

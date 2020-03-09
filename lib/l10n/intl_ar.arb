@@ -1,0 +1,246 @@
+{
+  "@@last_modified": "2020-02-08T21:15:20.330967",
+ 
+  "allCategory": "كل الاصناف",
+  "@allCategory": {
+    "description": "All Cateogries option",
+    "type": "text",
+    "placeholders": {}
+  },
+  "frieds": "المفليات",
+  "@frieds": {
+    "description": "Freids Menu",
+    "type": "text",
+    "placeholders": {}
+  },
+  "fastFood": "الاكل السريع",
+  "@fastFood": {
+    "description": "Fast Food Menu",
+    "type": "text",
+    "placeholders": {}
+  },
+  "creamery": "كريمه",
+  "@creamery": {
+    "description": "Creamery Menu",
+    "type": "text",
+    "placeholders": {}
+  },
+  "hotDrinks": "مشروبات ساخنه",
+  "@hotDrinks": {
+    "description": "Hot_drinks Menu",
+    "type": "text",
+    "placeholders": {}
+  },
+  "vegetables": "خضروات",
+  "@vegetables": {
+    "description": "Vegetables  Menu",
+    "type": "text",
+    "placeholders": {}
+  },
+  "resturants": "المطاعم",
+  "@resturants": {
+    "description": "Resturants  Menu",
+    "type": "text",
+    "placeholders": {}
+  },
+
+
+
+
+
+
+
+
+  "homePage": "القائمةالرئيسيه",
+  "@homePage": {
+    "description": "Home Page ",
+    "type": "text",
+    "placeholders": {}
+  },
+  "myProfile": "حسابى",
+  "@myProfile": {
+    "description": "My Profile",
+    "type": "text",
+    "placeholders": {}
+  },
+  "myCart": "العربه",
+  "@myCart": {
+    "description": "My Cart",
+    "type": "text",
+    "placeholders": {}
+  },
+  "store": "المعرض",
+  "@store": {
+    "description": "Store",
+    "type": "text",
+    "placeholders": {}
+  },
+  "addResturant": "اضافه مطعم",
+  "@addResturant": {
+    "description": "Add Resturant",
+    "type": "text",
+    "placeholders": {}
+  },
+  "setting": "الاعدادت",
+  "@setting": {
+    "description": "Setting",
+    "type": "text",
+    "placeholders": {}
+  },
+  "timerPage": "الوقت المتبقى",
+  "@timerPage": {
+    "description": "Timer Page",
+    "type": "text",
+    "placeholders": {}
+  },
+  "language": "اللغه",
+  "@language": {
+    "description": "Language",
+    "type": "text",
+    "placeholders": {}
+  },
+  "signOut": "تسجيل الخروج",
+  "@signOut": {
+    "description": "Sing Out",
+    "type": "text",
+    "placeholders": {}
+  },
+    "signIn": "تسحيل الدخول",
+    "@signIn": {
+      "description": "Sing In button",
+      "type": "text",
+      "placeholders": {}
+    },
+    "signUp": "تسحيل ",
+    "@signUp": {
+      "description": "Sing In button",
+      "type": "text",
+      "placeholders": {}
+    },
+
+
+
+
+    "menutxt": "القائمه",
+    "@menutxt": {
+      "description": "Menu container",
+      "type": "text",
+      "placeholders": {}
+    },
+
+
+
+
+    "quantity": "الكميه",
+    "@quantity": {
+      "description": "Quantity container",
+      "type": "text",
+      "placeholders": {}
+    },
+    "buyNowbtn": "شراء الان",
+    "@buyNowbtn": {
+      "description": "BuyNowbtn container",
+      "type": "text",
+      "placeholders": {}
+    },
+    "addToCartbtn": "اضف الى العربه",
+    "@addToCartbtn": {
+      "description": "addToCartbtn container",
+      "type": "text",
+      "placeholders": {}
+    }, 
+
+
+    "bill": "الفاتوره",
+    "@bill": {
+      "description": "bill txt",
+      "type": "text",
+      "placeholders": {}
+    },
+    "items": "الاصناف",
+    "@items": {
+      "description": "items txt",
+      "type": "text",
+      "placeholders": {}
+    },
+    "price": "السعر",
+    "@price": {
+      "description": "price txt",
+      "type": "text",
+      "placeholders": {}
+    },
+    "totalPrice": "احمالى الفاتوره",
+    "@totalPrice": {
+      "description": "totalPrice txt",
+      "type": "text",
+      "placeholders": {}
+    },
+    "chooseAvailableCoins": "العملات المتاحه",
+    "@chooseAvailableCoins": {
+      "description": "chooseAvailableCoins txt",
+      "type": "text",
+      "placeholders": {}
+    },
+    "deliveryOption": "طريقه الاستلام",
+    "@deliveryOption": {
+      "description": "deliveryOption txt",
+      "type": "text",
+      "placeholders": {}
+    },
+    "car": "السياره",
+    "@car": {
+      "description": "car txtr",
+      "type": "text",
+      "placeholders": {}
+    },
+    "carSpec": "مواصافات السياره",
+    "@carSpec": {
+      "description": "Car specs txt",
+      "type": "text",
+      "placeholders": {}
+    },
+    "carNumber": "رقم اللوحه",
+    "@carNumber": {
+      "description": "carNumber txt",
+      "type": "text",
+      "placeholders": {}
+    },
+    "carModel": "نوع السياره",
+    "@carModel": {
+      "description": "carModel txt",
+      "type": "text",
+      "placeholders": {}
+    },
+    "carColor": "لون السياره",
+    "@carColor": {
+      "description": "carColor txt",
+      "type": "text",
+      "placeholders": {}
+    },
+    "walk": "ماشيا",
+    "@walk": {
+      "description": "Walk container",
+      "type": "text",
+      "placeholders": {}
+    },
+    "personalInfo": "المعلومات الاضافيه",
+    "@personalInfo": {
+      "description": "personalInfo txt",
+      "type": "text",
+      "placeholders": {}
+    },
+    "phoneNumber": "رقم الهاتف",
+    "@phoneNumber": {
+      "description": "PhoneNumber txt",
+      "type": "text",
+      "placeholders": {}
+    },
+    "name": "الاسم",
+    "@name": {
+      "description": "name txt",
+      "type": "text",
+      "placeholders": {}
+    }
+    
+  
+}

@@ -11,7 +11,7 @@ class UserManagement{
       'Email' : user.email,
       'uid' : user.uid
     }).then((value){
-      //Navigator.of(context).pop();
+      Navigator.of(context).pop();
       Navigator.pushReplacement(context, PageTransition(type: PageTransitionType.rightToLeft, child: Survey()));
     }).catchError((e){print(e);});
   }

@@ -18,7 +18,7 @@ class SurveyManagement{
     Firestore.instance.collection('Survey').document('Q4').collection('Answers').add({
       'Answer': answer4,
     }).then((value){
-      //Navigator.of(context).pop();
+      Navigator.of(context).pop();
       Navigator.pushReplacement(context, PageTransition(type: PageTransitionType.rightToLeft, child: NewDashboard()));
     }).catchError((e){print(e);});
 
