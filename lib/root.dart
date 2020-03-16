@@ -3,6 +3,7 @@ import 'package:drive_thru/src/screens/NewDashboard.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 String uID;
+
 class Root extends StatefulWidget {
   //Root({this.current});
   //final AuthService current;
@@ -25,6 +26,7 @@ class _RootState extends State<Root> {
       setState((){
         authStatus = user == null ? AuthStatus.notSignedIn : AuthStatus.signedIn;
         uID = user.uid;
+        
       });
     });
   }

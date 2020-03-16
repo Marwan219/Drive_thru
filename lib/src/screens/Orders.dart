@@ -64,7 +64,7 @@ class _OrdersState extends State<Orders>{
         .collection('/users').document(uID).collection('Cart')
         .orderBy("Meal Name")
         .getDocuments(); 
-    print(querySnapshot.documents[0].data['Item Image URL']);
+
    
    if (querySnapshot.documents.length < _viewCount) {  
      hasMore = false;  
@@ -101,64 +101,109 @@ class _OrdersState extends State<Orders>{
               //   new
               // ],
         ),
-        body: Column(children: [  
-       Expanded(  
-         child: _cartItems.length == 0  
-             ? Center(  
-                 child:  SpinKitThreeBounce(
-                color: Colors.orange,
-               size: 20.0,
-                ),
-               )  
-             : ListView.builder(    
-                 itemCount: _cartItems.length,  
-                 itemBuilder: (context, index) {  
-                   return ListTile(
-                     leading: IconButton( icon:Icon(Icons.clear), onPressed: () => deleteCartItem(index),),
-                     title: Text(_cartItems[index].data['Meal Name']),
-                     subtitle: Text('Takes About '+_cartItems[index].data['Time To Done'].toString()+' Minutes'),
-                     trailing: Text(_cartItems[index].data['Meal Price'].toString()+ ' EGP'),
-                     onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) {
-                                return ProductPage(
-                                  itemImageURL: _cartItems[index].data['Item Image URL'],
-                                  pageTitle: _cartItems[index].data['Meal Name'],
-                                  productprice: _cartItems[index].data['Meal Price'],
-                                  timeToDone: _cartItems[index].data['Time To Done'],
-                                  restID: widget.resturantID,
-                                );
-                              },
+        body: Column(
+        children: [
+        Container(
+          margin: EdgeInsets.all(6),
+          width: MediaQuery.of(context).size.width*0.9,
+          child:  Row(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Divider(),
+            Text(
+              "Items",
+              style: h5,
+            ),
+            Spacer(
+              flex: 3,
+            ),
+            // Text(
+            //   "Quantiy",
+            //   style: h5,
+            // ),
+             Spacer(
+              flex: 1,
+            ),
+            // Text(
+            //   "Price",
+            //   style: h5,
+            // ),
+             Spacer(
+              flex: 1,
+            ),
+               Text(
+              "Time",
+              style: h5,
+            ),
+          
+          ],
+        ), ),
+      
+        Expanded(
+          child: _cartItems.length == 0
+              ? Center(
+                  child: Text('NO Orders'),
+                )
+              : ListView.builder(
+                  itemCount: _cartItems.length,
+                  itemBuilder: (context, index) {
+                    return
+                        //  restime3(price: 1,food: "sad",quantity: 22);
+                        ListTile(
+                    
+                      title: 
+                      Container(
+                        width: MediaQuery.of(context).size.width*0.3,
+                        child:Text(_cartItems[index].data['Meal Name']),
+                      ),
+                      
+                      trailing: Container(
+                        width: MediaQuery.of(context).size.width*0.2,
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: <Widget>[
+                            Divider(),
+                            // Text(_cartItems[index].data['Quantity'].toString()),
+                            // Spacer(
+                            //   flex: 1,
+                            // ),
+                            // // Text(double.parse((_cartItems[index].data['Meal Price']*_cartItems[index].data['Quantity']).toStringAsFixed(3).toString()).toStringAsFixed(2)),
+                            Spacer(
+                              flex: 2,
                             ),
-                          );
-                        },
-                     
-                   );
-                }  
-               ),  
-       ),  
-      //  isLoading  
-      //      ? Container(  
-      //         child: SpinKitThreeBounce(
-      //           color: Colors.orange,
-      //          size: 20.0,
-      //           ),
-              //  width: MediaQuery.of(context).size.width,  
-              //  padding: EdgeInsets.all(5),  
-              //  color: Colors.yellowAccent,  
-              //  child: Text(  
-              //    'Loading',  
-              //    textAlign: TextAlign.center,  
-              //    style: TextStyle(  
-              //      fontWeight: FontWeight.bold,  
-              //    ),  
-              //  ),  
-          //    )  
-          //  :
-            Container()  
-     ]));  
+                              Text(_cartItems[index].data['Time To Done'].toString()),
+                             Spacer(
+                              flex: 1,
+                            ),  
+
+                          ],
+                        ),
+                      ),
+                      
+                    );
+                  }),
+        ),
+        //  isLoading
+        //  ? Container(
+        //     child: SpinKitThreeBounce(
+        //       color: Colors.orange,
+        //      size: 20.0,
+        //       ),
+        //  width: MediaQuery.of(context).size.width,
+        //  padding: EdgeInsets.all(5),
+        //  color: Colors.yellowAccent,
+        //  child: Text(
+        //    'Loading',
+        //    textAlign: TextAlign.center,
+        //    style: TextStyle(
+        //      fontWeight: FontWeight.bold,
+        //    ),
+        //  ),
+        //  )
+        //  :
+  
+      ]),
+     );  
   }
 
 

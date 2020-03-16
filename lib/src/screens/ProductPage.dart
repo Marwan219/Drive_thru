@@ -8,6 +8,7 @@ import '../shared/partials.dart';
 import '../shared/buttons.dart';
 import 'package:drive_thru/src/screens/HomePage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import '../shared/Product.dart';
 import 'Buy.dart';
 
 class ProductPage extends StatefulWidget {
@@ -26,6 +27,7 @@ class ProductPage extends StatefulWidget {
 class _ProductPageState extends State<ProductPage> {
   double _rating = 4;
   int _quantity = 1;
+  Order cartorder; 
   String id = '';
 
   void initState(){
@@ -220,16 +222,12 @@ class _ProductPageState extends State<ProductPage> {
                               ],
                             ),
                           ),
-                          Container(
-                            width: 180,
-                            child: froyoOutlineBtn('Buy Now', () {
-                              Navigator.push(context, PageTransition(type: PageTransitionType.leftToRight, child: Buy(pageTitle: widget.pageTitle, product_quantity: _quantity, productPrice: widget.productprice, timeToDone: widget.timeToDone, resturantID: widget.restID)));
-                            }),
-                          ),
+                       
                           Container(
                             width: 180,
                             child: froyoFlatBtn('Add to Cart', () {
-                              CartManagement().addCartItem(context, mealName:  widget.pageTitle, mealPrice: widget.productprice, timeToDone: widget.timeToDone, docID: id, photoURL: widget.itemImageURL);
+                              CartManagement().addCartItem( context,Order(mealname:widget.pageTitle,imageurl: widget.itemImageURL,price:widget.productprice,itemQuantity:_quantity,timeToDone:widget.timeToDone),widget.restID);
+                              // CartManagement().addCartItem(context, mealName:  widget.pageTitle, mealPrice: widget.productprice, timeToDone: widget.timeToDone, docID: id, photoURL: widget.itemImageURL);
                             }),
                           )
                         ],

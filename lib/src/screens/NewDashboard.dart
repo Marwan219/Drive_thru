@@ -32,6 +32,7 @@ class _NewDashboardState extends State<NewDashboard> {
   bool isLoading = false;
   bool hasMore = true;
   int _viewCount = 5;
+
   DocumentSnapshot _lastDocument;
   ScrollController _scrollController = ScrollController();
   

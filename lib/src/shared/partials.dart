@@ -213,6 +213,34 @@ Widget foodItem(String food,
     ),
       )]));
 }
+Widget restime3({String food,int quantity,int price})
+{
+  return    Container(
+
+                         
+    child: Row(children: <Widget>[
+      Text(
+        food,
+        style: h4,
+      ),
+      Spacer(
+        flex: 8,
+      ),
+      Text(
+        quantity.toString(),
+        style: h4,
+      ),
+      Spacer(
+        flex: 2,
+      ),
+      Text(
+        price.toString()+" LE",
+        style: h4,
+      ),
+          
+      ],));
+                        
+}
 
 /*Widget rest(Product food,
     {double imgWidth, onLike, onTapped, bool isProductPage = false}) {
