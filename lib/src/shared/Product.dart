@@ -12,6 +12,7 @@ class Order
   int itemQuantity;
   int timeToDone;
   double ordertotal;
+  bool getProduct;
 
   Order({
     this.date,
@@ -24,7 +25,8 @@ class Order
     this.resturantid,
     this.imageurl,
     this.itemQuantity,
-    this.timeToDone
+    this.timeToDone,
+    this.getProduct
   });
 
 }

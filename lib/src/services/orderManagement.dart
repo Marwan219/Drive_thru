@@ -98,7 +98,8 @@ resturantOrdeering({Neworder order,total,restid}) async{
                 "Date":date,
                 "Items":order.totalOrderItems,
                 "Price":order.price,
-                "Status":order.status
+                "Status":order.status,
+                "get_product":false
                 });
        
   
